@@ -19,7 +19,7 @@ $pageTitle = $pageTitle ?? 'فروشگاه موبایل';
         <a class="brand" href="/" aria-label="صفحه اصلی فروشگاه"><span class="brand-mark">M</span><span>موبایل‌استور<small>انتخاب مطمئن</small></span></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="باز کردن منو"><span></span><span></span><span></span></button>
         <nav id="primary-nav" class="primary-nav" aria-label="ناوبری اصلی">
-            <a href="/">خانه</a><a href="/catalog">محصولات</a><a href="/services">خدمات</a><a href="/about">درباره ما</a><a class="nav-contact" href="/contact">ارتباط با ما</a>
+            <a href="/">خانه</a><a href="/portfolio">محصولات</a><a href="/services">خدمات</a><a href="/about">درباره ما</a><a class="nav-contact" href="/contact">ارتباط با ما</a>
         </nav>
     </div>
 </header>
