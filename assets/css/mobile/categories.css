@@ -1,0 +1,4 @@
+/* categories responsive rules */
+@media screen and (max-width:600px) {
+.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.category-card{min-height:200px;padding:15px}.category-icon{font-size:34px;margin-top:18px}.category-card h3{font-size:13px}.category-card p{font-size:10px}.category-index{font-size:8px}.category-arrow{bottom:13px;left:15px}
+}
