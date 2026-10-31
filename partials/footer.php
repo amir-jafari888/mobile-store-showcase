@@ -1,11 +1,1 @@
-</main>
-<footer class="site-footer">
-    <div class="container footer-main">
-        <div class="footer-brand"><a class="brand brand-light" href="/"><span class="brand-mark">M</span><span>موبایل‌استور<small>انتخاب مطمئن</small></span></a><p>برای انتخاب آگاهانه موبایل و لوازم جانبی، اطلاعات محصولات و راه‌های ارتباط با فروشگاه را یک‌جا ببینید.</p></div>
-        <div><h3>دسترسی سریع</h3><a href="/portfolio">محصولات</a><a href="/services">خدمات فروشگاه</a><a href="/about">درباره ما</a></div>
-        <div><h3>ارتباط</h3><a href="/contact">آدرس و راه‌های تماس</a><span>ساعات پاسخ‌گویی: مطابق اطلاعات فروشگاه</span></div>
-    </div>
-    <div class="footer-bottom"><div class="container">© <?= date('Y') ?> موبایل‌استور. تمامی حقوق محفوظ است.</div></div>
-</footer>
-<script type="module" src="<?= e(asset('js/main.js')) ?>"></script>
-</body></html>
+<?php declare(strict_types=1); ?><footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-light" href="/"><span class="brand-mark">M</span><span>موبایل‌استور<small>DIGITAL SHOWROOM</small></span></a><p>ویترین دیجیتال یک فروشگاه فیزیکی موبایل و لوازم جانبی؛ برای خرید و موجودی با فروشگاه در ارتباط باشید.</p></div><div><h3>مسیرها</h3><a href="/">خانه</a><a href="/catalog">کاتالوگ</a><a href="/about">درباره فروشگاه</a><a href="/contact">تماس و مراجعه</a></div><div><h3>ارتباط</h3><span>شماره تماس نمونه</span><span>آدرس نمونه فروشگاه</span><span>ساعات کاری نمونه</span></div></div><div class="container footer-bottom"><span>© 2026 Mobile Store Showcase — داده‌ها و تصاویر فعلاً نمایشی هستند.</span></div></footer></main><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><script type="module" src="<?= e(asset('js/main.js')) ?>"></script></body></html>
