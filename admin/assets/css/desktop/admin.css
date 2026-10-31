@@ -1,0 +1,2 @@
+/* Desktop admin layout: base desktop rules are defined in setting.css. */
+@media screen and (min-width:901px){.admin-sidebar{width:255px}.admin-main{margin-right:255px}}
