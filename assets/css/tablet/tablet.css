@@ -1,4 +1,0 @@
-/* Tablet: 601px–1009px */
-@media screen and (min-width:601px) and (max-width:1009px){
-.container{width:calc(100% - 56px)}.site-header{height:78px}.primary-nav{gap:17px;font-size:11px}.hero-layout{min-height:510px;gap:20px}.hero h1{font-size:48px}.hero-visual{transform:scale(.85)}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-card{min-height:210px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.benefits-layout{gap:35px}.about-preview-inner{gap:35px}.section{padding-block:80px}.footer-main{gap:35px}.page-hero h1{font-size:48px}
-}
