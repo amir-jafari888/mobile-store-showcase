@@ -1,0 +1,1 @@
+<section class="hero"><div class="container hero-content"><p class="eyebrow">انتخاب هوشمندانه</p><h1>دنیای موبایل و لوازم جانبی</h1><p>محصولات منتخب و اطلاعات فروشگاه را در یک نگاه ببینید.</p><a class="button" href="/portfolio">مشاهده محصولات</a></div></section>
