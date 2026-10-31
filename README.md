@@ -17,8 +17,11 @@
 - `partials/`: هدر، فوتر و سکشن‌های قابل استفاده مجدد.
 - `admin/`: رابط کاربری پنل مدیریت.
 - `assets/css/setting.css`: توکن‌ها و استایل‌های پایه.
-- `assets/css/main.css`: ورودی CSS و breakpointها.
-- `assets/css/mobile/`, `tablet/`, `desktop/`: استایل‌های ریسپانسیو.
+- `assets/css/main.css`: ورودی CSS و بارگذاری فایل‌های کامپوننت بر اساس breakpoint.
+- `assets/css/setting.css`: استایل‌های مشترک و پایه کامپوننت‌ها.
+- `assets/css/mobile/`, `tablet/`, `desktop/`: هر کامپوننت/صفحه فایل مستقل در هر سه breakpoint دارد؛ مانند `hero.css`، `categories.css` و `contact-page.css`.
+- `admin/assets/css/`: استایل‌های مستقل پنل مدیریت با ورودی `main.css` و فایل‌های `setting.css`، `mobile/admin.css`، `tablet/admin.css` و `desktop/admin.css`.
+- `admin/assets/js/`: ورودی و ماژول‌های JavaScript مختص پنل مدیریت.
 - `assets/js/main.js` و `assets/js/modules/`: ورودی جاوااسکریپت و ماژول‌ها.
 - `app/`: زیرساخت PHP و لایه‌های برنامه؛ در فاز بک‌اند توسعه داده می‌شود.
 
