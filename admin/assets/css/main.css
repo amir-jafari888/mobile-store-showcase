@@ -1,4 +1,4 @@
 @import url(./setting.css);
-@import url(./mobile/admin.css) only screen and (max-width:600px);
-@import url(./tablet/admin.css) only screen and (min-width:601px) and (max-width:900px);
-@import url(./desktop/admin.css) only screen and (min-width:901px);
+@import url(./mobile/admin-mobile.css) only screen and (max-width:600px);
+@import url(./tablet/admin-tablet.css) only screen and (min-width:601px) and (max-width:900px);
+@import url(./desktop/admin-desktop.css) only screen and (min-width:901px);
