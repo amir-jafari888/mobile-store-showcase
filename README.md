@@ -1,39 +1,44 @@
 # Mobile Store Showcase
 
-A lightweight, responsive catalogue website for a mobile phone and accessories store.
+وب‌سایت معرفی و کاتالوگ فروشگاه فیزیکی موبایل و لوازم جانبی.
 
-## Stack
+## فناوری‌ها
 - PHP 8.1+
-- HTML5, CSS3 and vanilla JavaScript
-- JSON files for content storage (no database, no e-commerce)
+- HTML5، CSS3 و Vanilla JavaScript (ES Modules)
+- معماری CSS: فایل پایه به‌همراه فایل‌های مستقل Mobile / Tablet / Desktop
+- فعلاً بدون اتصال دیتابیس و بدون قابلیت فروش آنلاین
 
-## Scope
-Product and category showcase, store information, homepage content, and a small admin foundation. No cart, checkout, payments, orders, or customer accounts.
+## محدوده محصول
+این پروژه ویترین و کاتالوگ است؛ سبد خرید، پرداخت، ثبت سفارش، حساب مشتری یا انبارداری آنلاین در محدوده فعلی نیست. پنل مدیریت فعلاً فقط رابط کاربری نمایشی است و هیچ عملیات ذخیره‌سازی یا ورود واقعی انجام نمی‌دهد.
 
-## Structure
-- `pages/`: standalone page views
-- `partials/`: reusable homepage sections
-- `assets/css/`: shared, mobile, tablet and desktop styles
-- `assets/js/`: entry point and modules
-- `admin/`: administration entry point
-- `app/`: configuration, core, services, middleware and helpers
-- `data/`: JSON content; must not be publicly accessible
+## ساختار
+- `index.php`: ورودی اصلی و تعریف مسیرها؛ سکشن‌های لندینگ با `require_once` بارگذاری می‌شوند.
+- `pages/`: صفحات مستقل (درباره ما، خدمات، کاتالوگ و تماس).
+- `partials/`: هدر، فوتر و سکشن‌های قابل استفاده مجدد.
+- `admin/`: رابط کاربری پنل مدیریت.
+- `assets/css/setting.css`: توکن‌ها و استایل‌های پایه.
+- `assets/css/main.css`: ورودی CSS و breakpointها.
+- `assets/css/mobile/`, `tablet/`, `desktop/`: استایل‌های ریسپانسیو.
+- `assets/js/main.js` و `assets/js/modules/`: ورودی جاوااسکریپت و ماژول‌ها.
+- `app/`: زیرساخت PHP و لایه‌های برنامه؛ در فاز بک‌اند توسعه داده می‌شود.
 
-## Run locally
-Use PHP 8.1+ and run from the project root:
+## اجرای محلی
+از ریشه پروژه اجرا کن:
 
 ```bash
 php -S localhost:8000
 ```
 
-Open http://localhost:8000.
+سپس `http://localhost:8000` را باز کن. برای اجرای صحیح مسیرهای بازنویسی‌شده در Apache، ماژول `mod_rewrite` باید فعال باشد.
 
-## Security notes
-- Keep `data/` outside the public document root in production where possible. The included Apache rules deny direct access as a fallback.
-- Set a strong `APP_KEY` environment variable before enabling authenticated admin actions.
-- Configure HTTPS in production.
-- Uploaded files require server-side MIME, extension, size and image validation before being accepted.
-- Admin authentication and write endpoints are intentionally not enabled in this scaffold.
+## قراردادهای معماری برای فاز بک‌اند
+- لایه نمایش (`pages/` و `partials/`) نباید مستقیماً به دیتابیس یا SQL وابسته شود.
+- داده‌ها از طریق Service/Repository به View پاس داده شوند؛ View فقط مسئول نمایش باشد.
+- برای اتصال آتی MySQL/MariaDB از PDO و Prepared Statements استفاده شود.
+- نام فیلدهای داده و ساختار Viewها تا حد امکان مستقل از نوع storage باقی بمانند.
+- اطلاعات اتصال و secretها در متغیر محیطی نگهداری شوند و وارد Git نشوند.
+- عملیات پنل فقط پس از پیاده‌سازی احراز هویت، مجوز دسترسی، CSRF و اعتبارسنجی سمت سرور فعال شوند.
+- فایل‌های آپلودی از نظر MIME، پسوند و اندازه اعتبارسنجی شوند و اجرای اسکریپت در مسیر آپلود ممنوع باشد.
 
-## Status
-Initial application scaffold. Product management and authenticated admin workflows are the next implementation phase.
+## وضعیت فعلی
+فاز طراحی رابط کاربری و صفحات. محتوای محصولات و اطلاعات تماس در بعضی بخش‌ها عمداً نمونه/جای‌نگهدار است و باید پیش از انتشار با داده واقعی فروشگاه جایگزین شود. این نسخه هنوز تست عملیاتی PHP/Apache و آزمون دسترس‌پذیری/مرورگر نشده است.
