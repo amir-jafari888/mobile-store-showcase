@@ -7,17 +7,19 @@ $pageTitle = $pageTitle ?? 'فروشگاه موبایل';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="معرفی محصولات و خدمات فروشگاه موبایل">
+    <meta name="description" content="معرفی موبایل‌ها، لوازم جانبی و خدمات فروشگاه؛ برای بررسی و خرید حضوری با ما در ارتباط باشید.">
+    <meta name="theme-color" content="#101827">
     <title><?= e($pageTitle) ?></title>
     <link rel="stylesheet" href="<?= e(asset('css/main.css')) ?>">
 </head>
 <body>
 <header class="site-header">
     <div class="container header-inner">
-        <a class="brand" href="/">فروشگاه موبایل</a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">منو</button>
+        <a class="brand" href="/" aria-label="صفحه اصلی فروشگاه"><span class="brand-mark">M</span><span>موبایل‌استور<small>انتخاب مطمئن</small></span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="باز کردن منو"><span></span><span></span><span></span></button>
         <nav id="primary-nav" class="primary-nav" aria-label="ناوبری اصلی">
-            <a href="/">خانه</a><a href="/about">درباره ما</a><a href="/services">خدمات</a><a href="/portfolio">محصولات</a><a href="/contact">تماس</a>
+            <a href="/">خانه</a><a href="/portfolio">محصولات</a><a href="/services">خدمات</a><a href="/about">درباره ما</a><a class="nav-contact" href="/contact">ارتباط با ما</a>
         </nav>
     </div>
 </header>
+<main>
