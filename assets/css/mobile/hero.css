@@ -1,4 +1,4 @@
-/* hero — mobile */
+/* hero responsive rules */
 @media screen and (max-width:600px) {
 .hero-layout{grid-template-columns:1fr;gap:5px;padding-block:55px 25px}.hero h1{font-size:43px;letter-spacing:-1px}.hero-copy>p{font-size:13px}.hero-actions{gap:15px;flex-wrap:wrap}.hero-note{margin-top:27px}.hero-visual{height:350px;transform:scale(.88);margin-top:-5px}.phone-front{width:170px;height:320px}.phone-back{width:160px;height:300px}.visual-glow{width:270px;height:270px}.chip-top{right:0;top:35px}.chip-bottom{left:0;bottom:35px}
 }
