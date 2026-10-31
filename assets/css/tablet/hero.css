@@ -1,4 +1,4 @@
-/* hero — tablet */
+/* hero responsive rules */
 @media screen and (min-width:601px) and (max-width:1009px) {
 .hero-layout{min-height:510px;gap:20px}.hero h1{font-size:48px}.hero-visual{transform:scale(.85)}
 }
