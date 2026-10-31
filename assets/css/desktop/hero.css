@@ -1,0 +1,4 @@
+/* hero — desktop */
+@media screen and (min-width:1010px) {
+.hero-layout{grid-template-columns:1fr 1fr}
+}
