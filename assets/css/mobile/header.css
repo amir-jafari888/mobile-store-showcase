@@ -1,4 +1,4 @@
-/* header — mobile */
+/* header responsive rules */
 @media screen and (max-width:600px) {
-.container{width:calc(100% - 36px)}.site-header{height:70px}.menu-toggle{display:block}.primary-nav{display:none;position:absolute;top:70px;right:0;left:0;background:#fff;padding:20px 24px 25px;flex-direction:column;align-items:stretch;gap:15px;border-bottom:1px solid var(--line);box-shadow:0 15px 20px #0000000b}.primary-nav.is-open{display:flex}.primary-nav .nav-contact{text-align:center}
+.container{width:calc(100% - 36px)}.site-header{height:70px}.menu-toggle{display:block}.primary-nav{display:none;position:absolute;top:70px;right:0;left:0;background:#fff;padding:20px 24px 25px;flex-direction:column;align-items:stretch;gap:15px;border-bottom:1px solid var(--line)}.primary-nav.is-open{display:flex}.primary-nav .nav-contact{text-align:center}
 }
