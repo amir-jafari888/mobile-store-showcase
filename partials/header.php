@@ -9,11 +9,7 @@ $pageTitle = $pageTitle ?? 'فروشگاه موبایل';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="معرفی محصولات و خدمات فروشگاه موبایل">
     <title><?= e($pageTitle) ?></title>
-    <link rel="stylesheet" href="<?= e(asset('css/setting.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('css/main.css')) ?>">
-    <link rel="stylesheet" href="<?= e(asset('css/mobile/mobile.css')) ?>">
-    <link rel="stylesheet" href="<?= e(asset('css/tablet/tablet.css')) ?>">
-    <link rel="stylesheet" href="<?= e(asset('css/desktop/desktop.css')) ?>">
 </head>
 <body>
 <header class="site-header">
