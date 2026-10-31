@@ -1,4 +1,4 @@
-/* trust-strip — mobile */
+/* trust-strip responsive rules */
 @media screen and (max-width:600px) {
 .trust-grid{grid-template-columns:repeat(2,1fr);gap:15px;padding-block:19px}.trust-grid>div{justify-content:flex-start;border:0;font-size:10px}
 }
