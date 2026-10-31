@@ -1,4 +1,4 @@
-/* header — tablet */
+/* header responsive rules */
 @media screen and (min-width:601px) and (max-width:1009px) {
 .container{width:calc(100% - 56px)}.site-header{height:78px}.primary-nav{gap:17px;font-size:11px}
 }
