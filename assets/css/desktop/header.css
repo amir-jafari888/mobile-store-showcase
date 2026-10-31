@@ -1,4 +1,4 @@
-/* header — desktop */
+/* header responsive rules */
 @media screen and (min-width:1010px) {
 .menu-toggle{display:none}.primary-nav{display:flex}
 }
