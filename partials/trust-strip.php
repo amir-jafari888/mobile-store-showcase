@@ -1,0 +1,1 @@
+<section class="trust-strip"><div class="container trust-grid"><div><b>01</b><span>تنوع انتخاب</span></div><div><b>02</b><span>مشاوره قبل از خرید</span></div><div><b>03</b><span>لوازم جانبی کاربردی</span></div><div><b>04</b><span>خرید حضوری و مطمئن</span></div></div></section>
