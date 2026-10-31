@@ -1,2 +1,7 @@
 import { initNavigation } from './modules/navigation.js';
-document.addEventListener('DOMContentLoaded', () => initNavigation());
+import { initCatalogFilters } from './modules/catalog.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    initNavigation();
+    initCatalogFilters();
+});
