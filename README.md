@@ -63,3 +63,30 @@ GitHub Actions در هر Push و Pull Request فایل‌های PHP را با PH
 
 ## وضعیت اعتبارسنجی
 تست‌های PHP lint و MySQL integration در CI اجرا می‌شوند. اجرای واقعی روی هاست مقصد، تست مرورگر، بررسی تنظیمات Apache/PHP و آزمون نفوذ عملی هنوز باید روی محیط استقرار انجام شوند. پس از دریافت تغییرات، `.env` را با حساب‌های دیتابیس تنظیم و `php database/migrate.php` را اجرا کنید.
+
+
+## راه‌اندازی محلی با XAMPP و phpMyAdmin
+
+در XAMPP ممکن است اتصال PDO با `DB_HOST=127.0.0.1` از سمت MySQL با میزبان `localhost` شناسایی شود. حساب‌های MySQL با Host متفاوت، حساب‌های جداگانه‌ای هستند؛ بنابراین داشتن مجوز برای `'mobile_store_app'@'127.0.0.1'` لزوماً مجوز `'mobile_store_app'@'localhost'` را فراهم نمی‌کند.
+
+برای تنظیم حساب‌های محلی:
+
+1. مطمئن شوید دیتابیس `mobile_store` از قبل در phpMyAdmin وجود دارد.
+2. فایل `database/xampp-local-users.sql` را در phpMyAdmin باز و اجرا کنید. این فایل فقط حساب‌ها و مجوزهای MySQL با Host برابر `localhost` را تنظیم می‌کند و هیچ جدول یا داده‌ای را تغییر نمی‌دهد.
+3. قبل از اجرا، هر دو مقدار `CHANGE_THIS_APP_PASSWORD` و `CHANGE_THIS_MIGRATION_PASSWORD` را با رمزهای انتخابی خود جایگزین کنید.
+4. همان رمزها را در فایل محلی و Git-ignored پروژه یعنی `.env` قرار دهید:
+
+```env
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=mobile_store
+DB_USER=mobile_store_app
+DB_PASSWORD=رمز_انتخابی_برنامه
+DB_MIGRATION_USER=mobile_store_migrator
+DB_MIGRATION_PASSWORD=رمز_انتخابی_مهاجرت
+DB_CHARSET=utf8mb4
+```
+
+5. Apache و MySQL را در XAMPP اجرا و صفحه سایت را دوباره باز کنید.
+
+این تنظیم مخصوص محیط توسعه محلی است. فایل SQL حساب `root` ایجاد نمی‌کند، از حساب `root` برای اتصال برنامه استفاده نمی‌کند و به دیتابیس یا جدول‌های موجود دست نمی‌زند. فایل `.env` را هرگز commit نکنید.
