@@ -26,7 +26,15 @@ if (in_array($timezone, timezone_identifiers_list(), true)) {
     date_default_timezone_set($timezone);
 }
 
-$debug = filter_var(getenv('APP_DEBUG') ?: 'false', FILTER_VALIDATE_BOOL);
+$environment = strtolower(trim((string) (getenv('APP_ENV') ?: 'production')));
+$debugRequested = filter_var(getenv('APP_DEBUG') ?: 'false', FILTER_VALIDATE_BOOL);
+$debugAllowed = in_array($environment, ['development', 'local', 'test'], true);
+$debug = $debugAllowed && $debugRequested;
+
+// PHP warnings/notices must never be emitted into an HTTP response.
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+
 \App\Core\ErrorHandler::register($debug);
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -35,10 +43,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     ini_set('session.cookie_httponly', '1');
     ini_set('session.cookie_samesite', 'Lax');
 
-    $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-    if ($isHttps) {
-        ini_set('session.cookie_secure', '1');
-    }
+    $isHttps = !empty($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off';
+    ini_set('session.cookie_secure', $isHttps ? '1' : '0');
 
     session_start();
 }
