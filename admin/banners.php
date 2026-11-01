@@ -9,7 +9,7 @@ if(!Database::configured())$error='اتصال دیتابیس تنظیم نشده
   if(!Csrf::verifyForm('banners',is_string($_POST['form_token']??null)?$_POST['form_token']:null))throw new InvalidArgumentException('این فرم قبلاً ارسال شده یا منقضی شده است؛ صفحه را تازه‌سازی کنید.');
   $id=filter_var($_POST['id']??null,FILTER_VALIDATE_INT)?:null;
   if(($_POST['action']??'save')==='delete'){$service->deleteBanner((int)$id);Csrf::consumeForm('banners');$_SESSION['admin_flash']='بنر حذف شد.';header('Location: /admin/banners.php',true,303);exit;}
-  $service->saveBanner($_POST,$id);unset($_SESSION['banner_form_token']);$_SESSION['admin_flash']=$id?'بنر ویرایش شد.':'بنر ثبت شد.';header('Location: /admin/banners.php',true,303);exit;
+  $service->saveBanner($_POST,$id);Csrf::consumeForm('banners');$_SESSION['admin_flash']=$id?'بنر ویرایش شد.':'بنر ثبت شد.';header('Location: /admin/banners.php',true,303);exit;
  }
  $success=(string)($_SESSION['admin_flash']??'');unset($_SESSION['admin_flash']);
  if($editId){$found=$service->banner($editId);if(!$found)throw new InvalidArgumentException('بنر پیدا نشد.');$form=array_merge($form,$found);}
