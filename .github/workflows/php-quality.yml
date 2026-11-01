@@ -1,4 +1,4 @@
-name: PHP quality
+name: PHP quality and integration
 
 on:
   push:
@@ -10,8 +10,32 @@ permissions:
   contents: read
 
 jobs:
-  php-lint:
+  php-quality:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: mobile_store_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      APP_ENV: test
+      APP_DEBUG: false
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_NAME: mobile_store_test
+      DB_USER: mobile_store_app
+      DB_PASSWORD: app-secret
+      DB_MIGRATION_USER: mobile_store_migrator
+      DB_MIGRATION_PASSWORD: migrator-secret
+      DB_CHARSET: utf8mb4
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -28,3 +52,21 @@ jobs:
           while IFS= read -r -d '' file; do
             php -l "$file"
           done < <(find . -type f -name '*.php' -not -path './vendor/*' -print0)
+      - name: Create least-privilege database users
+        run: |
+          php <<'PHP'
+          <?php
+          $pdo = new PDO('mysql:host=127.0.0.1;port=3306;charset=utf8mb4', 'root', 'root', [
+              PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+          ]);
+          $pdo->exec("CREATE USER 'mobile_store_app'@'%' IDENTIFIED BY 'app-secret'");
+          $pdo->exec("GRANT SELECT, INSERT, UPDATE, DELETE ON mobile_store_test.* TO 'mobile_store_app'@'%'");
+          $pdo->exec("CREATE USER 'mobile_store_migrator'@'%' IDENTIFIED BY 'migrator-secret'");
+          $pdo->exec("GRANT ALL PRIVILEGES ON mobile_store_test.* TO 'mobile_store_migrator'@'%'");
+          PHP
+      - name: Apply migrations twice to verify repeatability
+        run: |
+          php database/migrate.php
+          php database/migrate.php
+      - name: Run MySQL integration regressions
+        run: php tests/integration.php
