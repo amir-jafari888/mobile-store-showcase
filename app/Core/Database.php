@@ -35,13 +35,27 @@ final class Database
         $password = self::env('DB_PASSWORD') ?? '';
         $charset = self::env('DB_CHARSET') ?? 'utf8mb4';
 
-        $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=%s', $host, $port, $name, $charset);
+        if (!ctype_digit($port) || (int) $port < 1 || (int) $port > 65535) {
+            throw new RuntimeException('Invalid database port configuration.');
+        }
+
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', (string) $name)) {
+            throw new RuntimeException('Invalid database name configuration.');
+        }
+
+        if ($charset !== 'utf8mb4') {
+            throw new RuntimeException('Only utf8mb4 database connections are supported.');
+        }
+
+        $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4', $host, $port, $name);
 
         try {
             self::$connection = new PDO($dsn, $user, $password, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_STRINGIFY_FETCHES => false,
+                PDO::ATTR_TIMEOUT => 5,
             ]);
         } catch (PDOException $exception) {
             throw new RuntimeException('Unable to connect to the database.', 0, $exception);
