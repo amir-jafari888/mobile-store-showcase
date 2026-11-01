@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
+use App\Core\Database;
+
 if (PHP_SAPI !== 'cli') {
     http_response_code(404);
     exit("Not found.\n");
 }
 
 require_once dirname(__DIR__) . '/app/Config/bootstrap.php';
-
-use App\Core\Database;
 
 if (!Database::configured()) {
     fwrite(STDERR, "Database is not configured. Set DB_* values in .env first.\n");
@@ -47,4 +47,5 @@ try {
     throw $exception;
 } finally {
     putenv('ADMIN_PASSWORD');
+    unset($password);
 }

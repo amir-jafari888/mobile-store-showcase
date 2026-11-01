@@ -30,21 +30,22 @@
 php database/migrate.php
 ```
 
-این دستور دیتابیس تعریف‌شده در `DB_NAME` را در صورت نیاز ایجاد می‌کند، جدول‌ها را می‌سازد و اجرای migration را ثبت می‌کند. کاربر MySQL باید مجوز CREATE DATABASE و CREATE/ALTER TABLE داشته باشد. اجرای مجدد، در صورت عدم تغییر checksum، بدون ایجاد مجدد جداول خاتمه می‌یابد.
+این دستور دیتابیس تعریف‌شده در `DB_NAME` را در صورت نیاز ایجاد می‌کند، جدول‌ها را می‌سازد و اجرای migration پایه را ثبت می‌کند. کاربر MySQL باید مجوز CREATE DATABASE و CREATE TABLE داشته باشد. اجرای مجدد، در صورت یکسان بودن checksum، بدون اجرای دوباره schema خاتمه می‌یابد. فایل `schema.sql` پس از اجرا migration پایه محسوب می‌شود و نباید درجا ویرایش شود.
 
 ## ساخت اولین مدیر
 
-متغیرهای زیر را فقط در محیط shell تنظیم کن و سپس دستور CLI را اجرا کن. رمز را در کد یا فایل‌های commit‌شده قرار نده:
+متغیرهای زیر را در shell تنظیم کن و سپس دستور CLI را اجرا کن. رمز با ورودی مخفی خوانده می‌شود؛ آن را در کد یا command history قرار نده:
 
 ```bash
 export ADMIN_NAME="Store Admin"
 export ADMIN_EMAIL="admin@example.com"
-export ADMIN_PASSWORD="use-a-unique-password-at-least-12-characters"
+read -rsp "Admin password: " ADMIN_PASSWORD; echo
+export ADMIN_PASSWORD
 php database/create_admin.php
 unset ADMIN_NAME ADMIN_EMAIL ADMIN_PASSWORD
 ```
 
-برای محیط production از secret manager یا روش امن مدیریت متغیرهای محیطی هاست استفاده کن. این اسکریپت از طریق HTTP اجرا نمی‌شود.
+رمز باید حداقل ۱۲ کاراکتر باشد. برای محیط production از secret manager یا روش امن مدیریت متغیرهای محیطی هاست استفاده کن. این اسکریپت از طریق HTTP اجرا نمی‌شود.
 
 ## اجرای محلی
 

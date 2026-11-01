@@ -74,14 +74,14 @@ try {
 
     if ($existingChecksum !== false) {
         if (!hash_equals((string) $existingChecksum, $checksum)) {
-            throw new RuntimeException('Applied migration checksum differs from the current schema.sql. Do not edit an applied migration; create a new migration instead.');
+            throw new RuntimeException('The applied schema checksum does not match database/schema.sql. Restore the original schema file; do not edit an applied baseline in place.');
         }
         fwrite(STDOUT, "Database is already up to date.\n");
         exit(0);
     }
 
     foreach (array_filter(array_map('trim', explode(';', $schema))) as $statement) {
-        if ($statement !== '' && !str_starts_with($statement, '--')) {
+        if ($statement !== '') {
             $pdo->exec($statement);
         }
     }
