@@ -17,8 +17,8 @@ $readEnv = static function (string $key, ?string $default = null): ?string {
 $host = $readEnv('DB_HOST');
 $port = $readEnv('DB_PORT', '3306');
 $name = $readEnv('DB_NAME');
-$user = $readEnv('DB_USER');
-$password = $readEnv('DB_PASSWORD', '');
+$user = $readEnv('DB_MIGRATION_USER', $readEnv('DB_USER'));
+$password = $readEnv('DB_MIGRATION_PASSWORD', $readEnv('DB_PASSWORD', ''));
 $charset = $readEnv('DB_CHARSET', 'utf8mb4');
 
 if (!$host || !$name || !$user || $charset !== 'utf8mb4'
@@ -36,7 +36,7 @@ if (!is_file($schemaFile) || !is_readable($schemaFile)) {
 
 try {
     $pdo = new PDO(
-        sprintf('mysql:host=%s;port=%s;charset=utf8mb4', $host, $port),
+        sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4', $host, $port, $name),
         $user,
         $password,
         [
@@ -46,11 +46,6 @@ try {
         ]
     );
 
-    $pdo->exec(sprintf(
-        'CREATE DATABASE IF NOT EXISTS `%s` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci',
-        $name
-    ));
-    $pdo->exec(sprintf('USE `%s`', $name));
     $pdo->exec(
         'CREATE TABLE IF NOT EXISTS schema_migrations (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
