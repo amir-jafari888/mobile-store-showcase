@@ -28,11 +28,22 @@ final class AuthService
         }
 
         session_regenerate_id(true);
+        unset($_SESSION['_csrf']);
         $_SESSION['admin'] = [
             'id' => (int) $admin['id'],
             'name' => $admin['name'],
             'email' => $admin['email'],
         ];
+
+        if (password_needs_rehash($admin['password_hash'], PASSWORD_DEFAULT)) {
+            $rehash = Database::connection()->prepare(
+                'UPDATE admins SET password_hash = :password_hash WHERE id = :id'
+            );
+            $rehash->execute([
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                'id' => $admin['id'],
+            ]);
+        }
 
         Database::connection()
             ->prepare('UPDATE admins SET last_login_at = NOW() WHERE id = :id')
@@ -43,13 +54,13 @@ final class AuthService
 
     public function logout(): void
     {
-        unset($_SESSION['admin']);
+        unset($_SESSION['admin'], $_SESSION['_csrf']);
         session_regenerate_id(true);
     }
 
     public function check(): bool
     {
-        return isset($_SESSION['admin']['id']);
+        return isset($_SESSION['admin']['id']) && is_int($_SESSION['admin']['id']);
     }
 
     public function admin(): ?array
