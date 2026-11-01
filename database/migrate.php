@@ -51,7 +51,6 @@ try {
         $name
     ));
     $pdo->exec(sprintf('USE `%s`', $name));
-
     $pdo->exec(
         'CREATE TABLE IF NOT EXISTS schema_migrations (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -61,37 +60,59 @@ try {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
     );
 
-    $migrationName = '001_core_schema';
-    $schema = file_get_contents($schemaFile);
-    if ($schema === false) {
-        throw new RuntimeException('Unable to read schema file.');
-    }
-    $checksum = hash('sha256', $schema);
+    $applyMigration = static function (PDO $pdo, string $migrationName, string $sql): void {
+        $checksum = hash('sha256', $sql);
+        $check = $pdo->prepare(
+            'SELECT checksum FROM schema_migrations WHERE migration = :migration LIMIT 1'
+        );
+        $check->execute(['migration' => $migrationName]);
+        $existingChecksum = $check->fetchColumn();
 
-    $check = $pdo->prepare('SELECT checksum FROM schema_migrations WHERE migration = :migration LIMIT 1');
-    $check->execute(['migration' => $migrationName]);
-    $existingChecksum = $check->fetchColumn();
-
-    if ($existingChecksum !== false) {
-        if (!hash_equals((string) $existingChecksum, $checksum)) {
-            throw new RuntimeException('The applied schema checksum does not match database/schema.sql. Restore the original schema file; do not edit an applied baseline in place.');
+        if ($existingChecksum !== false) {
+            if (!hash_equals((string) $existingChecksum, $checksum)) {
+                throw new RuntimeException(
+                    sprintf('Migration checksum mismatch for %s. Never edit an applied migration; add a new one.', $migrationName)
+                );
+            }
+            fwrite(STDOUT, sprintf("Already applied: %s\n", $migrationName));
+            return;
         }
-        fwrite(STDOUT, "Database is already up to date.\n");
-        exit(0);
-    }
 
-    foreach (array_filter(array_map('trim', explode(';', $schema))) as $statement) {
-        if ($statement !== '') {
+        $statements = array_filter(array_map('trim', explode(';', $sql)));
+        foreach ($statements as $statement) {
             $pdo->exec($statement);
         }
+
+        $insert = $pdo->prepare(
+            'INSERT INTO schema_migrations (migration, checksum) VALUES (:migration, :checksum)'
+        );
+        $insert->execute([
+            'migration' => $migrationName,
+            'checksum' => $checksum,
+        ]);
+        fwrite(STDOUT, sprintf("Applied: %s\n", $migrationName));
+    };
+
+    $baseline = file_get_contents($schemaFile);
+    if ($baseline === false) {
+        throw new RuntimeException('Unable to read database/schema.sql.');
+    }
+    $applyMigration($pdo, '001_core_schema', $baseline);
+
+    $migrationFiles = glob(__DIR__ . '/migrations/*.sql') ?: [];
+    sort($migrationFiles, SORT_STRING);
+    foreach ($migrationFiles as $migrationFile) {
+        if (!is_file($migrationFile) || !is_readable($migrationFile)) {
+            throw new RuntimeException('An incremental migration is unreadable.');
+        }
+        $sql = file_get_contents($migrationFile);
+        if ($sql === false) {
+            throw new RuntimeException('Unable to read migration: ' . basename($migrationFile));
+        }
+        $applyMigration($pdo, pathinfo($migrationFile, PATHINFO_FILENAME), $sql);
     }
 
-    $insert = $pdo->prepare(
-        'INSERT INTO schema_migrations (migration, checksum) VALUES (:migration, :checksum)'
-    );
-    $insert->execute(['migration' => $migrationName, 'checksum' => $checksum]);
-
-    fwrite(STDOUT, "Core database schema migrated successfully.\n");
+    fwrite(STDOUT, "Database migrations are up to date.\n");
 } catch (Throwable $exception) {
     fwrite(STDERR, "Migration failed: " . $exception->getMessage() . "\n");
     exit(1);
