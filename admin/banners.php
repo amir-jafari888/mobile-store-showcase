@@ -6,19 +6,16 @@ AdminGuard::require();$admin=(new AuthService())->admin()??[];$adminName=(string
 if(!Database::configured())$error='اتصال دیتابیس تنظیم نشده است.';else try{
  if($_SERVER['REQUEST_METHOD']==='POST'){
   if(!Csrf::verify($_POST['_csrf']??null))throw new InvalidArgumentException('درخواست معتبر نیست؛ صفحه را تازه‌سازی کنید.');
-  $submittedToken=$_POST['form_token']??null;
-  $storedToken=$_SESSION['banner_form_token']??null;
-  if(!is_string($submittedToken)||!is_string($storedToken)||!hash_equals($storedToken,$submittedToken))throw new InvalidArgumentException('این فرم قبلاً ارسال شده یا منقضی شده است؛ صفحه را تازه‌سازی کنید.');
+  if(!Csrf::verifyForm('banners',is_string($_POST['form_token']??null)?$_POST['form_token']:null))throw new InvalidArgumentException('این فرم قبلاً ارسال شده یا منقضی شده است؛ صفحه را تازه‌سازی کنید.');
   $id=filter_var($_POST['id']??null,FILTER_VALIDATE_INT)?:null;
-  if(($_POST['action']??'save')==='delete'){$service->deleteBanner((int)$id);unset($_SESSION['banner_form_token']);$_SESSION['admin_flash']='بنر حذف شد.';header('Location: /admin/banners.php',true,303);exit;}
+  if(($_POST['action']??'save')==='delete'){$service->deleteBanner((int)$id);Csrf::consumeForm('banners');$_SESSION['admin_flash']='بنر حذف شد.';header('Location: /admin/banners.php',true,303);exit;}
   $service->saveBanner($_POST,$id);unset($_SESSION['banner_form_token']);$_SESSION['admin_flash']=$id?'بنر ویرایش شد.':'بنر ثبت شد.';header('Location: /admin/banners.php',true,303);exit;
  }
  $success=(string)($_SESSION['admin_flash']??'');unset($_SESSION['admin_flash']);
  if($editId){$found=$service->banner($editId);if(!$found)throw new InvalidArgumentException('بنر پیدا نشد.');$form=array_merge($form,$found);}
  $banners=$service->banners();
 }catch(InvalidArgumentException $e){$error=$e->getMessage();$form=array_merge($form,$_POST);$banners=$service->banners();}catch(Throwable $e){$error='عملیات انجام نشد؛ ساختار دیتابیس را بررسی کنید.';}
-if(!isset($_SESSION['banner_form_token']))$_SESSION['banner_form_token']=bin2hex(random_bytes(32));
-$bannerFormToken=$_SESSION['banner_form_token'];
+$bannerFormToken=Csrf::formToken('banners');
 require __DIR__.'/partials/header.php';?>
 <section class="admin-panel"><div class="panel-heading"><div><span>اسلایدر و کمپین‌ها</span><h2><?=$editId?'ویرایش بنر':'افزودن بنر جدید'?></h2></div></div><?php if($error):?><div class="crud-alert error"><?=e($error)?></div><?php endif;?><?php if($success):?><div class="crud-alert success"><?=e($success)?></div><?php endif;?>
 <form class="crud-form" method="post" action="/admin/banners.php"><input type="hidden" name="_csrf" value="<?=e(Csrf::token())?>"><input type="hidden" name="form_token" value="<?=e($bannerFormToken)?>"><input type="hidden" name="action" value="save"><?php if($editId):?><input type="hidden" name="id" value="<?=(int)$editId?>"><?php endif;?>
