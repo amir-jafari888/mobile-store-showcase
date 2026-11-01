@@ -49,7 +49,7 @@ final class AuthService
             return false;
         }
 
-        $this->clearAttempts($ipHash, $accountHash);
+        $this->clearAttempts($accountHash);
         session_regenerate_id(true);
         unset($_SESSION['_csrf']);
         $_SESSION['admin'] = [
@@ -177,7 +177,7 @@ final class AuthService
 
         $select = $pdo->prepare(
             'SELECT attempt_count,
-                    (window_started_at < NOW() - INTERVAL 15 MINUTE) AS window_expired
+                    (window_started_at < NOW() - INTERVAL ' . self::ATTEMPT_WINDOW_MINUTES . ' MINUTE) AS window_expired
              FROM login_attempts
              WHERE scope_hash = :scope_hash
              FOR UPDATE'
@@ -195,7 +195,7 @@ final class AuthService
             'UPDATE login_attempts
              SET attempt_count = :attempt_count,
                  window_started_at = CASE WHEN :reset_window = 1 THEN NOW() ELSE window_started_at END,
-                 blocked_until = CASE WHEN :blocked = 1 THEN DATE_ADD(NOW(), INTERVAL 15 MINUTE) ELSE NULL END,
+                 blocked_until = CASE WHEN :blocked = 1 THEN DATE_ADD(NOW(), INTERVAL ' . self::ATTEMPT_WINDOW_MINUTES . ' MINUTE) ELSE NULL END,
                  last_attempt_at = NOW()
              WHERE scope_hash = :scope_hash'
         );
@@ -207,15 +207,12 @@ final class AuthService
         ]);
     }
 
-    private function clearAttempts(string $ipHash, string $accountHash): void
+    private function clearAttempts(string $accountHash): void
     {
         $statement = Database::connection()->prepare(
-            'DELETE FROM login_attempts WHERE scope_hash IN (:ip_hash, :account_hash)'
+            'DELETE FROM login_attempts WHERE scope_hash = :account_hash'
         );
-        $statement->execute([
-            'ip_hash' => $ipHash,
-            'account_hash' => $accountHash,
-        ]);
+        $statement->execute(['account_hash' => $accountHash]);
     }
 
     private function invalidateSession(): void
