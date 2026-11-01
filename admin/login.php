@@ -9,16 +9,34 @@ use App\Services\AuthService;
 
 $auth = new AuthService();
 
+$resolveNext = static function ($candidate): string {
+    if (!is_string($candidate) || $candidate === ''
+        || preg_match('/[\x00-\x1F\x7F\\\\]/', $candidate)) {
+        return '/admin/';
+    }
+
+    $parts = parse_url($candidate);
+    if ($parts === false
+        || isset($parts['scheme'], $parts['host'], $parts['user'], $parts['pass'])
+        || isset($parts['host'])
+        || !str_starts_with((string) ($parts['path'] ?? ''), '/admin/')) {
+        return '/admin/';
+    }
+
+    return $candidate;
+};
+
+$nextCandidate = $_SERVER['REQUEST_METHOD'] === 'POST'
+    ? ($_POST['next'] ?? null)
+    : ($_GET['next'] ?? null);
+$next = $resolveNext($nextCandidate);
+
 if ($auth->check()) {
-    Response::redirect('/admin/');
+    Response::redirect($next);
 }
 
 $errors = [];
 $email = '';
-$next = isset($_GET['next']) && is_string($_GET['next']) ? $_GET['next'] : '/admin/';
-if ($next === '' || !str_starts_with($next, '/') || str_starts_with($next, '//')) {
-    $next = '/admin/';
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim((string) ($_POST['email'] ?? ''));
@@ -30,12 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
         $errors[] = 'ایمیل یا رمز عبور صحیح نیست.';
     } elseif (!$auth->login($email, $password)) {
-        $errors[] = 'ایمیل یا رمز عبور صحیح نیست.';
+        $errors[] = 'ایمیل یا رمز عبور صحیح نیست یا موقتاً امکان ورود وجود ندارد.';
     } else {
-        // The pre-authentication CSRF token must not survive the auth boundary.
-        unset($_SESSION['_csrf']);
-        $separator = str_contains($next, '?') ? '&' : '?';
-        Response::redirect($next === '/admin/' ? '/admin/' : $next);
+        Response::redirect($next);
     }
 }
 
