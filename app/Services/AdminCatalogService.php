@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+namespace App\Services;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
+use InvalidArgumentException;
+final class AdminCatalogService {
+ public function __construct(private readonly ProductRepository $products=new ProductRepository(),private readonly CategoryRepository $categories=new CategoryRepository()){}
+ public function products():array{return$this->products->adminList();}
+ public function categories():array{return$this->categories->adminList();}
+ public function product(int $id):?array{return$this->products->findById($id);}
+ public function category(int $id):?array{return$this->categories->findById($id);}
+ public function saveProduct(array $i,?int $id=null):int{$d=$this->productData($i);if($this->products->slugExists($d['slug'],$id))throw new InvalidArgumentException('این Slug قبلاً استفاده شده است.');if($id===null)return$this->products->create($d);if(!$this->products->update($id,$d))throw new InvalidArgumentException('محصول پیدا نشد.');return$id;}
+ public function saveCategory(array $i,?int $id=null):int{$d=$this->categoryData($i);if($this->categories->slugExists($d['slug'],$id))throw new InvalidArgumentException('این Slug قبلاً استفاده شده است.');if($id===null)return$this->categories->create($d);if(!$this->categories->update($id,$d))throw new InvalidArgumentException('دسته‌بندی پیدا نشد.');return$id;}
+ public function deleteProduct(int $id):void{if($id<1||!$this->products->delete($id))throw new InvalidArgumentException('محصول پیدا نشد.');}
+ public function deleteCategory(int $id):void{if($id<1||!$this->categories->delete($id))throw new InvalidArgumentException('دسته‌بندی پیدا نشد.');}
+ private function productData(array $i):array{$name=trim((string)($i['name']??''));$slug=trim((string)($i['slug']??''));$short=trim((string)($i['short_description']??''));$sort=filter_var($i['sort_order']??0,FILTER_VALIDATE_INT);$cat=trim((string)($i['category_id']??''));$image=trim((string)($i['image_path']??''));if($name===''||mb_strlen($name)>180)throw new InvalidArgumentException('نام محصول الزامی و حداکثر ۱۸۰ کاراکتر است.');if(!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/',$slug)||strlen($slug)>220)throw new InvalidArgumentException('Slug باید انگلیسی و با خط تیره جدا شود.');if(mb_strlen($short)>500)throw new InvalidArgumentException('توضیح کوتاه حداکثر ۵۰۰ کاراکتر است.');if($sort===false)throw new InvalidArgumentException('ترتیب نمایش باید عدد صحیح باشد.');if($cat!==''&&(!ctype_digit($cat)||!$this->categories->findById((int)$cat)))throw new InvalidArgumentException('دسته‌بندی معتبر نیست.');$this->imagePath($image);return['name'=>$name,'slug'=>$slug,'short_description'=>$short,'description'=>trim((string)($i['description']??'')),'image_path'=>$image,'category_id'=>$cat,'featured'=>isset($i['featured'])?1:0,'is_active'=>isset($i['is_active'])?1:0,'sort_order'=>$sort];}
+ private function categoryData(array $i):array{$name=trim((string)($i['name']??''));$slug=trim((string)($i['slug']??''));$sort=filter_var($i['sort_order']??0,FILTER_VALIDATE_INT);$description=trim((string)($i['description']??''));$image=trim((string)($i['image_path']??''));if($name===''||mb_strlen($name)>120)throw new InvalidArgumentException('نام دسته‌بندی الزامی و حداکثر ۱۲۰ کاراکتر است.');if(!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/',$slug)||strlen($slug)>160)throw new InvalidArgumentException('Slug باید انگلیسی و با خط تیره جدا شود.');if(mb_strlen($description)>500||$sort===false)throw new InvalidArgumentException('توضیحات یا ترتیب نمایش معتبر نیست.');$this->imagePath($image);return['name'=>$name,'slug'=>$slug,'description'=>$description,'image_path'=>$image,'is_active'=>isset($i['is_active'])?1:0,'sort_order'=>$sort];}
+ private function imagePath(string $path):void{if($path!==''&&(!preg_match('~^/assets/uploads/[a-zA-Z0-9/_-]+\.(jpg|jpeg|png|webp|avif)$~i',$path)||str_contains($path,'..')))throw new InvalidArgumentException('مسیر تصویر باید داخل assets/uploads و دارای پسوند تصویر مجاز باشد.');}
+}

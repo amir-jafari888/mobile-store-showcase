@@ -1,0 +1,1 @@
+</main><script type="module" src="/admin/assets/js/main.js"></script></body></html>
