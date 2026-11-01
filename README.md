@@ -11,11 +11,12 @@
 
 ## راه‌اندازی دیتابیس
 1. افزونه‌های PHP یعنی `pdo_mysql` و `mbstring` را فعال کنید.
-2. `.env.example` را به `.env` کپی کنید و اطلاعات اتصال دیتابیس را تنظیم کنید.
-3. برای محیط محلی، `APP_ENV=development` قرار دهید؛ Debug به‌صورت پیش‌فرض خاموش است و فقط با `APP_DEBUG=true` در محیط development/local/test فعال می‌شود.
-4. از ریشه پروژه اجرا کنید: `php database/migrate.php`. این فرمان هم schema پایه و هم migrationهای افزایشی پوشه `database/migrations/` را اجرا می‌کند.
-5. برای ساخت مدیر از CLI، متغیرهای `ADMIN_NAME`، `ADMIN_EMAIL` و `ADMIN_PASSWORD` را تنظیم و `php database/create_admin.php` را اجرا کنید. رمز حداقل ۱۲ کاراکتر باشد.
-6. در Production حتماً HTTPS فعال و حساب دیتابیس دارای حداقل مجوزهای لازم باشد؛ از حساب root استفاده نکنید.
+2. دیتابیس را از phpMyAdmin بسازید و دو کاربر جدا تعریف کنید: کاربر برنامه با مجوزهای SELECT/INSERT/UPDATE/DELETE و کاربر migration با مجوزهای DDL روی همان دیتابیس.
+3. `.env.example` را به `.env` کپی کنید؛ `DB_USER/DB_PASSWORD` برای برنامه و `DB_MIGRATION_USER/DB_MIGRATION_PASSWORD` برای اجرای migration هستند. اگر متغیرهای migration تنظیم نشوند، اسکریپت از حساب برنامه استفاده می‌کند.
+4. برای محیط محلی، `APP_ENV=development` قرار دهید؛ Debug به‌صورت پیش‌فرض خاموش است و فقط با `APP_DEBUG=true` در محیط development/local/test فعال می‌شود.
+5. از ریشه پروژه اجرا کنید: `php database/migrate.php`. این فرمان هم schema پایه و هم migrationهای افزایشی پوشه `database/migrations/` را اجرا می‌کند.
+6. برای ساخت مدیر از CLI، متغیرهای `ADMIN_NAME`، `ADMIN_EMAIL` و `ADMIN_PASSWORD` را تنظیم و `php database/create_admin.php` را اجرا کنید. رمز حداقل ۱۲ کاراکتر باشد.
+7. در Production حتماً HTTPS فعال و حساب دیتابیس دارای حداقل مجوزهای لازم باشد؛ از حساب root استفاده نکنید.
 
 ## فاز ۴ — مدیریت کاتالوگ
 - `/admin/products.php`: ایجاد، فهرست، ویرایش و حذف محصولات.
