@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-$pageTitle = 'درباره ما | موبایل‌استور';
+$pageTitle = 'درباره ما | ' . ($storeSettings['store_name'] ?? 'موبایل‌استور');
 require BASE_PATH . '/partials/header.php';
 ?>
 <section class="page-hero"><div class="container"><span class="eyebrow">داستان ما</span><h1>تکنولوژی، وقتی<br><em>انتخاب درستی باشد.</em></h1><p>ما اینجا هستیم تا مسیر شناخت و انتخاب موبایل و لوازم جانبی برایت روشن‌تر و ساده‌تر باشد.</p></div></section>
