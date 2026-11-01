@@ -17,8 +17,10 @@ $resolveNext = static function ($candidate): string {
 
     $parts = parse_url($candidate);
     if ($parts === false
-        || isset($parts['scheme'], $parts['host'], $parts['user'], $parts['pass'])
+        || isset($parts['scheme'])
         || isset($parts['host'])
+        || isset($parts['user'])
+        || isset($parts['pass'])
         || !str_starts_with((string) ($parts['path'] ?? ''), '/admin/')) {
         return '/admin/';
     }
