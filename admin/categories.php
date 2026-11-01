@@ -5,8 +5,6 @@ use App\Core\Database;
 use App\Middleware\AdminGuard;
 use App\Middleware\Csrf;
 use App\Services\AdminCatalogService;
-use InvalidArgumentException;
-use PDOException;
 AdminGuard::require();
 $admin=(new App\Services\AuthService())->admin()??[];
 $adminName=(string)($admin['name']??'مدیر');$adminEmail=(string)($admin['email']??'');
