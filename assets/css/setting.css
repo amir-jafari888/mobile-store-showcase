@@ -467,3 +467,68 @@ img{display:block;max-width:100%}
   html{scroll-behavior:auto}
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
+
+
+/* Mobile navigation: full-width top-down dropdown with aligned RTL links.
+   Scoped to phones; desktop and tablet navigation remain unchanged. */
+@media(max-width:600px){
+  #primary-nav.primary-nav{
+    position:fixed;
+    top:64px;
+    right:0;
+    left:0;
+    z-index:101;
+    width:100%;
+    height:auto;
+    max-height:calc(100dvh - 64px);
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:0;
+    padding:8px 20px 18px;
+    border:1px solid var(--color-border);
+    border-top:0;
+    border-radius:0 0 18px 18px;
+    background:rgba(255,255,255,.985);
+    box-shadow:0 18px 34px rgba(24,22,40,.12);
+    transform:translateY(-110%);
+    transform-origin:top center;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:transform 280ms var(--ease),opacity 200ms ease,visibility 0s linear 280ms;
+  }
+  #primary-nav.primary-nav.is-open{
+    transform:translateY(0);
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition:transform 280ms var(--ease),opacity 200ms ease;
+  }
+  #primary-nav.primary-nav a{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    width:100%;
+    min-height:52px;
+    padding:13px 4px;
+    border:0;
+    border-bottom:1px solid #E9E9EF;
+    border-radius:0;
+    background:transparent;
+    color:var(--color-text-primary);
+    text-align:right;
+    text-align:start;
+    font-size:13px;
+    font-weight:700;
+    transition:color 180ms ease,background 180ms ease;
+  }
+  #primary-nav.primary-nav a:last-child{border-bottom:0}
+  #primary-nav.primary-nav a:hover,
+  #primary-nav.primary-nav a:focus-visible{
+    background:transparent;
+    color:var(--color-primary-dark);
+  }
+}
