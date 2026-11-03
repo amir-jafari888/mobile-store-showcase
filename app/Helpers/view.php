@@ -37,3 +37,16 @@ function asset(string $path): string
 {
     return url('assets/' . ltrim($path, '/'));
 }
+
+
+/**
+ * Resolve uploaded media paths relative to the application root while preserving remote image URLs.
+ */
+function media_url(string $path): string
+{
+    if (preg_match('~^https?://~i', $path)) {
+        return $path;
+    }
+
+    return url(ltrim($path, '/'));
+}
