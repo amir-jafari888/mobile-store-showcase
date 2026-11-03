@@ -27,7 +27,7 @@ $router->get('/', static function () use (
     $featuredProducts,
     $heroBanners
 ): void {
-    $pageTitle = ($storeSettings['store_name'] ?? 'موبایل‌استور')
+    $pageTitle = 'موبایل مدیا'
         . ' | ویترین دیجیتال موبایل و گجت';
 
     require_once BASE_PATH . '/partials/header.php';
