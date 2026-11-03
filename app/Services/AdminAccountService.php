@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\\Services;
+namespace App\Services;
 
-use App\\Core\\Database;
+use App\Core\Database;
 use PDOException;
 use RuntimeException;
 
@@ -35,16 +35,16 @@ final class AdminAccountService
         $email = mb_strtolower(trim($email));
 
         if ($name === '' || mb_strlen($name) > 120) {
-            throw new \\InvalidArgumentException('نام مدیر باید بین ۱ تا ۱۲۰ کاراکتر باشد.');
+            throw new \InvalidArgumentException('نام مدیر باید بین ۱ تا ۱۲۰ کاراکتر باشد.');
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 190) {
-            throw new \\InvalidArgumentException('ایمیل واردشده معتبر نیست.');
+            throw new \InvalidArgumentException('ایمیل واردشده معتبر نیست.');
         }
         if ($currentPassword === '') {
-            throw new \\InvalidArgumentException('برای ذخیره تغییرات، رمز عبور فعلی را وارد کنید.');
+            throw new \InvalidArgumentException('برای ذخیره تغییرات، رمز عبور فعلی را وارد کنید.');
         }
         if ($newPassword !== '' && strlen($newPassword) < 12) {
-            throw new \\InvalidArgumentException('رمز عبور جدید باید حداقل ۱۲ کاراکتر داشته باشد.');
+            throw new \InvalidArgumentException('رمز عبور جدید باید حداقل ۱۲ کاراکتر داشته باشد.');
         }
 
         $pdo = Database::connection();
@@ -55,7 +55,7 @@ final class AdminAccountService
         $admin = $select->fetch();
 
         if (!is_array($admin) || !password_verify($currentPassword, (string) $admin['password_hash'])) {
-            throw new \\InvalidArgumentException('رمز عبور فعلی صحیح نیست.');
+            throw new \InvalidArgumentException('رمز عبور فعلی صحیح نیست.');
         }
 
         $passwordHash = $newPassword === ''
@@ -76,7 +76,7 @@ final class AdminAccountService
             ]);
         } catch (PDOException $exception) {
             if ((string) $exception->getCode() === '23000') {
-                throw new \\InvalidArgumentException('این ایمیل قبلاً برای حساب دیگری ثبت شده است.');
+                throw new \InvalidArgumentException('این ایمیل قبلاً برای حساب دیگری ثبت شده است.');
             }
             throw $exception;
         }
