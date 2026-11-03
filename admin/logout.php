@@ -23,4 +23,4 @@ if (!Csrf::verify(is_string($token) ? $token : null)) {
 
 $auth->logout();
 unset($_SESSION['_csrf']);
-Response::redirect('/admin/login.php');
+Response::redirect(url('admin/login.php'));
