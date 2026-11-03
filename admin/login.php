@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/app/Config/bootstrap.php';
 
-use App\Core\Response;
-use App\Middleware\Csrf;
-use App\Services\AuthService;
+use App\\Core\\Response;
+use App\\Middleware\\Csrf;
+use App\\Services\\AuthService;
 
 $auth = new AuthService();
 
@@ -13,7 +13,7 @@ $adminHome = url('admin/');
 
 $resolveNext = static function ($candidate) use ($adminHome): string {
     if (!is_string($candidate) || $candidate === ''
-        || preg_match('/[\x00-\x1F\x7F\\\\]/', $candidate)) {
+        || preg_match('/[\\x00-\\x1F\\x7F\\\\\\\\]/', $candidate)) {
         return $adminHome;
     }
 
@@ -67,45 +67,74 @@ $pageTitle = 'ورود مدیر | پنل مدیریت';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
     <title><?= e($pageTitle) ?></title>
-    <link rel="stylesheet" href="<?= e(url('admin/assets/css/main.css')) ?>">
-    <style>
-        .admin-auth-page{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--admin-bg,#f8fafc)}
-        .admin-auth-card{width:min(100%,430px);background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:32px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
-        .admin-auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:28px;color:#0f172a;text-decoration:none}
-        .admin-auth-brand>span{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#172554;color:#fff;font-weight:800}
-        .admin-auth-brand b{display:block;font-size:18px}.admin-auth-brand small{display:block;color:#64748b;margin-top:3px}
-        .admin-auth-card h1{margin:0 0 8px;font-size:26px;color:#0f172a}.admin-auth-card>p{margin:0 0 24px;color:#64748b;line-height:1.8}
-        .admin-auth-field{display:grid;gap:8px;margin-bottom:16px}.admin-auth-field label{font-weight:700;color:#0f172a}.admin-auth-field input{width:100%;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:10px;padding:12px 14px;font:inherit;outline:none}.admin-auth-field input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-        .admin-auth-error{margin-bottom:18px;padding:12px 14px;border-radius:10px;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;line-height:1.7}
-        .admin-auth-submit{width:100%;border:0;border-radius:10px;padding:13px 16px;background:#2563eb;color:#fff;font:inherit;font-weight:700;cursor:pointer}.admin-auth-submit:hover{background:#1d4ed8}
-        .admin-auth-back{display:block;margin-top:18px;text-align:center;color:#64748b;text-decoration:none;font-size:14px}
-    </style>
+    <link rel="stylesheet" href="<?= e(url('admin/assets/css/login.css')) ?>">
+    <script src="<?= e(url('admin/assets/js/login.js')) ?>" defer></script>
 </head>
 <body class="admin-auth-page">
 <main class="admin-auth-card">
-    <a class="admin-auth-brand" href="<?= e(url()) ?>">
-        <span>M</span><div><b>موبایل‌استور</b><small>پنل مدیریت</small></div>
-    </a>
-    <h1>ورود مدیر</h1>
-    <p>برای دسترسی به پنل مدیریت، اطلاعات حساب مدیر را وارد کنید.</p>
+    <h1>ورود به حساب مدیریت</h1>
+    <p class="admin-auth-intro">برای ادامه، ایمیل و رمز عبور حساب مدیریتی خود را وارد کنید.</p>
 
     <?php if ($errors): ?>
-        <div class="admin-auth-error" role="alert"><?= e($errors[0]) ?></div>
+        <div class="admin-auth-error" role="alert" aria-live="assertive"><?= e($errors[0]) ?></div>
     <?php endif; ?>
 
     <form method="post" action="<?= e(url('admin/login.php')) ?>">
         <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
         <input type="hidden" name="next" value="<?= e($next) ?>">
+
         <div class="admin-auth-field">
             <label for="email">ایمیل</label>
-            <input id="email" name="email" type="email" value="<?= e($email) ?>" autocomplete="username" required autofocus>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                value="<?= e($email) ?>"
+                autocomplete="username"
+                inputmode="email"
+                dir="ltr"
+                placeholder="name@example.com"
+                required
+                autofocus
+            >
         </div>
+
         <div class="admin-auth-field">
             <label for="password">رمز عبور</label>
-            <input id="password" name="password" type="password" autocomplete="current-password" required>
+            <div class="admin-auth-password-wrap">
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="رمز عبور خود را وارد کنید"
+                    required
+                >
+                <button
+                    class="admin-auth-password-toggle"
+                    type="button"
+                    data-password-toggle
+                    aria-label="نمایش رمز عبور"
+                    aria-pressed="false"
+                    aria-controls="password"
+                >
+                    <svg data-icon="eye-off" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M3 3l18 18"></path>
+                        <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                        <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5.2 0 8.8 4.8 9.8 6.5a1 1 0 0 1 0 1c-.4.7-1.3 2-2.7 3.2"></path>
+                        <path d="M6.2 6.2C3.9 7.6 2.5 9.7 2.2 11.5a1 1 0 0 0 0 1C3.2 14.2 6.8 19 12 19c1 0 2-.2 2.9-.5"></path>
+                    </svg>
+                    <svg data-icon="eye" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M2.2 12s3.6-7 9.8-7 9.8 7 9.8 7-3.6 7-9.8 7-9.8-7-9.8-7Z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+            </div>
         </div>
+
         <button class="admin-auth-submit" type="submit">ورود به پنل</button>
     </form>
+
     <a class="admin-auth-back" href="<?= e(url()) ?>">بازگشت به وب‌سایت</a>
 </main>
 </body>
