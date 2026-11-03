@@ -1,48 +1,45 @@
+import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.mjs';
+
 export function initHeroSlider() {
   const root = document.querySelector('[data-hero-slider]');
   if (!root) return;
-  const slides = [...root.querySelectorAll('[data-hero-slide]')];
-  const dots = [...root.querySelectorAll('[data-hero-dot]')];
+
   const previous = root.querySelector('[data-hero-prev]');
   const next = root.querySelector('[data-hero-next]');
-  if (slides.length < 2) return;
-
+  const pagination = root.querySelector('.hero-dots');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let activeIndex = 0;
-  let intervalId = null;
-  let manualPause = reducedMotion;
-  let focusPause = false;
 
-  const show = (index) => {
-    activeIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => {
-      const active = i === activeIndex;
-      slide.classList.toggle('is-active', active);
-      slide.setAttribute('aria-hidden', String(!active));
-    });
-    dots.forEach((dot, i) => {
-      const active = i === activeIndex;
-      dot.classList.toggle('is-active', active);
-      dot.setAttribute('aria-pressed', String(active));
-    });
-  };
-  const stop = () => {
-    if (intervalId !== null) window.clearInterval(intervalId);
-    intervalId = null;
-  };
-  const start = () => {
-    stop();
-    if (manualPause || focusPause || document.hidden) return;
-    intervalId = window.setInterval(() => show(activeIndex + 1), 6500);
-  };
+  if (!root.querySelectorAll('.swiper-slide').length || !pagination) return;
 
-  previous?.addEventListener('click', () => { show(activeIndex - 1); start(); });
-  next?.addEventListener('click', () => { show(activeIndex + 1); start(); });
-  dots.forEach(dot => dot.addEventListener('click', () => { show(Number(dot.dataset.heroDot)); start(); }));
-  root.addEventListener('focusin', () => { focusPause = true; stop(); });
-  root.addEventListener('focusout', event => {
-    if (!root.contains(event.relatedTarget)) { focusPause = false; start(); }
+  new Swiper(root.querySelector('.hero-media'), {
+    direction: 'horizontal',
+    loop: true,
+    speed: reducedMotion ? 0 : 550,
+    watchOverflow: true,
+    grabCursor: false,
+    autoplay: reducedMotion ? false : {
+      delay: 6500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: false,
+    },
+    navigation: {
+      prevEl: previous,
+      nextEl: next,
+    },
+    pagination: {
+      el: pagination,
+      clickable: true,
+      bulletClass: 'hero-dot',
+      bulletActiveClass: 'is-active',
+      renderBullet(index, className) {
+        return `<button type="button" class="${className}" aria-label="نمایش بنر ${index + 1}"></button>`;
+      },
+    },
+    a11y: {
+      enabled: true,
+      prevSlideMessage: 'بنر قبلی',
+      nextSlideMessage: 'بنر بعدی',
+      paginationBulletMessage: 'نمایش بنر شماره {{index}}',
+    },
   });
-  document.addEventListener('visibilitychange', start);
-  start();
 }
