@@ -22,7 +22,7 @@ if ($slides === []) $slides = $fallbackSlides;
   <div class="hero-media" aria-live="off">
     <?php foreach ($slides as $index => $slide): ?>
       <div class="hero-slide<?= $index === 0 ? ' is-active' : '' ?>" data-hero-slide aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>">
-        <?php if (!empty($slide['link_url'])): ?><a href="<?= e($slide['link_url']) ?>"><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>></a><?php else: ?><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>><?php endif; ?>
+        <?php if (!empty($slide['link_url'])): ?><a href="<?= e($slide['link_url']) ?>"><img src="<?= e(media_url((string) $slide['image_path'])) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>></a><?php else: ?><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>><?php endif; ?>
       </div>
     <?php endforeach; ?>
   </div>
