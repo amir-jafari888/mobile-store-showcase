@@ -78,3 +78,28 @@
 .hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:54px;padding:0 25px;border-radius:15px;background:var(--color-primary-dark);color:#fff;font-size:14px;font-weight:800;box-shadow:0 12px 26px rgba(112,75,130,.2);transition:transform var(--transition),background var(--transition),box-shadow var(--transition)}
 .hero-cta:hover{transform:translateY(-3px);background:var(--accent);box-shadow:0 16px 30px rgba(112,75,130,.24)}
 .hero-cta span{font-size:19px;line-height:1}
+
+
+/* Hero layout correction: keep copy in the right column on desktop. */
+.hero{
+  background:#F2ECF5;
+  padding-block:clamp(38px,5vw,72px);
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  grid-template-areas:"media content";
+  align-items:center;
+  gap:clamp(32px,5vw,76px);
+  direction:ltr;
+}
+.hero-media{grid-area:media;align-self:stretch;min-height:360px}
+.hero-content{
+  grid-area:content;
+  width:100%;
+  max-width:540px;
+  justify-self:end;
+  align-self:center;
+  direction:rtl;
+  text-align:right;
+}
