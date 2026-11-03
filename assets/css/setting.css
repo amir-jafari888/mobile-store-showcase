@@ -618,3 +618,111 @@ img{display:block;max-width:100%}
     max-width:100%;
   }
 }
+
+
+/* Trust strip redesign: verifiable paths, clear icons, and responsive cards. */
+.trust-strip{
+  padding:30px 0;
+  background:#F8F6F9!important;
+  color:var(--ink);
+  border-top:1px solid rgba(112,75,130,.08);
+  border-bottom:1px solid rgba(112,75,130,.08);
+}
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.trust-item{
+  min-width:0;
+  min-height:104px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:18px 16px;
+  border:1px solid #E9E1EC;
+  border-radius:19px;
+  background:#fff;
+  color:var(--ink);
+  text-decoration:none;
+  box-shadow:0 7px 22px rgba(44,34,50,.035);
+  transition:transform 180ms ease,border-color 180ms ease,box-shadow 180ms ease;
+}
+.trust-item:hover{
+  transform:translateY(-3px);
+  border-color:#D6C2E0;
+  box-shadow:0 13px 28px rgba(70,48,82,.09);
+}
+.trust-icon{
+  flex:0 0 46px;
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:#F1EAF4;
+  color:#704B82;
+}
+.trust-icon svg{width:23px;height:23px;display:block}
+.trust-copy{
+  min-width:0;
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  gap:5px;
+  text-align:right;
+}
+.trust-copy strong{
+  color:#302638;
+  font-size:14px;
+  font-weight:850;
+  line-height:1.6;
+}
+.trust-copy small{
+  color:#706777;
+  font-size:11px;
+  font-weight:500;
+  line-height:1.8;
+}
+.trust-arrow{
+  flex:0 0 auto;
+  color:#9D70B0;
+  font-size:18px;
+  transition:transform 180ms ease;
+}
+.trust-item:hover .trust-arrow{transform:translateX(-3px)}
+.trust-item:focus-visible{
+  outline:3px solid rgba(112,75,130,.35);
+  outline-offset:3px;
+}
+@media (min-width:601px) and (max-width:1009px){
+  .trust-strip{padding:26px 0}
+  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .trust-item{min-height:96px;padding:15px}
+  .trust-copy strong{font-size:14px}
+  .trust-copy small{font-size:12px}
+}
+@media (max-width:600px){
+  .trust-strip{padding:20px 0}
+  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .trust-item{
+    min-height:112px;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:9px;
+    padding:13px 12px;
+    border-radius:15px;
+  }
+  .trust-icon{width:38px;height:38px;flex-basis:38px;border-radius:12px}
+  .trust-icon svg{width:20px;height:20px}
+  .trust-copy{gap:3px}
+  .trust-copy strong{font-size:12px;line-height:1.6}
+  .trust-copy small{font-size:10px;line-height:1.7}
+  .trust-arrow{display:none}
+}
+@media (max-width:360px){
+  .trust-grid{gap:7px}
+  .trust-item{padding:11px 9px;min-height:108px}
+  .trust-copy strong{font-size:11px}
+  .trust-copy small{font-size:9px}
+}
