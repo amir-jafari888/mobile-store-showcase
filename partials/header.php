@@ -19,13 +19,7 @@ $storeName = $storeSettings['store_name'] ?? 'موبایل مدیا';
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="<?= e(url()) ?>" aria-label="صفحه اصلی <?= e($storeName) ?>">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6.5" y="2.75" width="11" height="18.5" rx="2.5" stroke="currentColor" stroke-width="1.7"/>
-          <path d="M10 5.8h4M10.5 18.2h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span class="brand-name"><?= e($storeName) ?><small>MOBILE MEDIA</small></span>
+      <span class="brand-name brand-wordmark"><?= e($storeName) ?></span>
     </a>
     <nav id="primary-nav" class="primary-nav" aria-label="ناوبری اصلی">
       <a href="<?= e(url()) ?>">خانه</a>

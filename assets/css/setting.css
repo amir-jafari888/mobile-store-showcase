@@ -532,3 +532,19 @@ img{display:block;max-width:100%}
     color:var(--color-primary-dark);
   }
 }
+
+
+/* Brand wordmark: bold purple-to-orange gradient typography. */
+.site-header .brand-wordmark{
+  display:inline-block;
+  color:var(--color-primary-dark);
+  background:linear-gradient(105deg,#7650A5 0%,#9853A0 48%,#F08A42 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-size:clamp(21px,2vw,27px);
+  font-weight:900;
+  line-height:1.2;
+  letter-spacing:-.045em;
+  white-space:nowrap;
+}
