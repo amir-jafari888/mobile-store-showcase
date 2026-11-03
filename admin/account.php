@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/app/Config/bootstrap.php';
 
-use App\\Middleware\\AdminGuard;
-use App\\Middleware\\Csrf;
-use App\\Services\\AdminAccountService;
+use App\Middleware\AdminGuard;
+use App\Middleware\Csrf;
+use App\Services\AdminAccountService;
 
 AdminGuard::require();
 
-$admin = (new \\App\\Services\\AuthService())->admin() ?? [];
+$admin = (new \App\Services\AuthService())->admin() ?? [];
 $adminId = (int) ($admin['id'] ?? 0);
 $pageTitle = 'تنظیمات حساب مدیر';
 $activeSection = 'account';
