@@ -843,3 +843,9 @@ img{display:block;max-width:100%}
   .category-track{grid-auto-columns:86%}
   .category-card{min-height:190px}
 }
+
+/* Scoped specificity keeps the carousel card geometry above legacy grid rules. */
+.categories-section .category-card{min-height:210px;padding:20px 18px;border-radius:20px;background:linear-gradient(145deg,#FBF9FE 0%,#F2ECFA 100%)}
+@media(min-width:601px) and (max-width:1009px){.categories-section .category-card{min-height:230px;padding:21px}}
+@media(max-width:600px){.categories-section .category-card{min-height:205px;padding:16px 14px;border-radius:17px}}
+@media(max-width:360px){.categories-section .category-card{min-height:190px}}
