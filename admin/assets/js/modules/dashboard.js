@@ -7,17 +7,18 @@ export function initAdminDashboard() {
     if (!toggle || !sidebar || !backdrop) return;
 
     const firstLink = sidebar.querySelector('.admin-nav a');
+    const isCompactLayout = () => window.matchMedia('(max-width: 900px)').matches;
 
     const closeMenu = (restoreFocus = true) => {
         if (!body.classList.contains('admin-menu-open')) return;
         body.classList.remove('admin-menu-open');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-label', 'باز کردن منوی مدیریت');
-        if (restoreFocus) toggle.focus();
+        if (restoreFocus && isCompactLayout()) toggle.focus();
     };
 
     const openMenu = () => {
-        if (window.innerWidth > 900) return;
+        if (!isCompactLayout()) return;
         body.classList.add('admin-menu-open');
         toggle.setAttribute('aria-expanded', 'true');
         toggle.setAttribute('aria-label', 'بستن منوی مدیریت');
@@ -25,7 +26,11 @@ export function initAdminDashboard() {
     };
 
     toggle.addEventListener('click', () => {
-        body.classList.contains('admin-menu-open') ? closeMenu() : openMenu();
+        if (body.classList.contains('admin-menu-open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
 
     backdrop.addEventListener('click', () => closeMenu());
@@ -38,6 +43,6 @@ export function initAdminDashboard() {
     });
 
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) closeMenu(false);
+        if (!isCompactLayout()) closeMenu(false);
     });
 }
