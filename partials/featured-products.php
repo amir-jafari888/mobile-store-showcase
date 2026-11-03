@@ -44,6 +44,7 @@ if ($isProductPreview) $featuredProducts = $productPreview;
                 <span><?= e($product['category_name'] ?? 'محصول') ?></span>
                 <h3><?= e($product['name'] ?? '') ?></h3>
                 <?php if (!empty($product['short_description'])): ?><p><?= e($product['short_description']) ?></p><?php endif; ?>
+                <?php if (isset($product['price']) && $product['price'] !== '' && $product['price'] !== null && (int)$product['price'] > 0): ?><div class="product-card-price"><strong><?= e(number_format((int)$product['price'])) ?></strong><span>تومان</span></div><?php else: ?><div class="product-card-price is-unpriced">برای اطلاع از قیمت تماس بگیرید</div><?php endif; ?>
                 <span class="product-card-action"><?= $productSlug !== '' && !$isProductPreview ? 'مشاهده مشخصات محصول' : 'مشاهده کاتالوگ' ?> <b aria-hidden="true">←</b></span>
               </div>
             </a>

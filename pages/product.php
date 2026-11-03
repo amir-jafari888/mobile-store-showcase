@@ -17,6 +17,7 @@ $productName = (string) ($product['name'] ?? 'محصول');
 $productImage = trim((string) ($product['image_path'] ?? ''));
 $productDescription = trim((string) ($product['description'] ?? ''));
 $productSummary = trim((string) ($product['short_description'] ?? ''));
+$productPrice = isset($product['price']) && $product['price'] !== '' && $product['price'] !== null && (int) $product['price'] > 0 ? (int) $product['price'] : null;
 ?>
 <section class="page-hero product-detail-hero">
   <div class="container">
@@ -40,8 +41,9 @@ $productSummary = trim((string) ($product['short_description'] ?? ''));
     <div class="product-detail-copy">
       <span class="eyebrow">مشخصات محصول</span>
       <h2>درباره <?= e($productName) ?></h2>
+      <div class="product-detail-price"><?php if ($productPrice !== null): ?><strong><?= e(number_format($productPrice)) ?></strong><span>تومان</span><?php else: ?><span>برای اطلاع از قیمت تماس بگیرید</span><?php endif; ?></div>
       <p><?= e($productDescription !== '' ? $productDescription : ($productSummary !== '' ? $productSummary : 'برای دریافت اطلاعات تکمیلی این محصول با فروشگاه در ارتباط باش.')) ?></p>
-      <div class="product-detail-note"><strong>نیاز به اطلاعات بیشتر داری؟</strong><span>برای اطلاع از قیمت، موجودی و جزئیات محصول با موبایل مدیا تماس بگیر.</span></div>
+      <div class="product-detail-note"><strong>نیاز به اطلاعات بیشتر داری؟</strong><span>برای اطلاع از موجودی و جزئیات بیشتر محصول با موبایل مدیا تماس بگیر.</span></div>
       <div class="product-detail-actions">
         <a class="button button-primary" href="<?= e(url('contact')) ?>">استعلام قیمت و موجودی</a>
         <a class="text-link" href="<?= e(url('catalog')) ?>">بازگشت به کاتالوگ <span aria-hidden="true">←</span></a>
