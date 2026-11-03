@@ -17,6 +17,5 @@
             'aria-label',
             shouldShowPassword ? 'پنهان کردن رمز عبور' : 'نمایش رمز عبور'
         );
-        passwordInput.focus({ preventScroll: true });
     });
 })();
