@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/app/Config/bootstrap.php';
-
-use App\\Core\\Router;
+use App\Core\Router;
+use App\Services\PublicStorefrontService;
 use App\\Services\\PublicStorefrontService;
 
 $storefront = new PublicStorefrontService();
