@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\\Services;
+namespace App\Services;
 
 use InvalidArgumentException;
 use RuntimeException;
@@ -43,7 +43,7 @@ final class ImageUploadService
             throw new InvalidArgumentException('تصویر باید معتبر و حداکثر ۵ مگابایت باشد.');
         }
 
-        $finfo = new \\finfo(FILEINFO_MIME_TYPE);
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
         $mime = $finfo->file($tmp);
         if (!is_string($mime) || !isset(self::MIME_EXTENSIONS[$mime])) {
             throw new InvalidArgumentException('فرمت مجاز: JPG، JPEG، PNG، WEBP و AVIF.');
