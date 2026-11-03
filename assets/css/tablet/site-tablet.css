@@ -31,3 +31,24 @@
   .hero-content h1{font-size:clamp(30px,4vw,42px)}
   .hero-content p{font-size:14px;margin:15px 0 22px}
 }
+
+
+/* Tablet hero: separate readable copy from the image instead of overlaying it. */
+@media(min-width:601px) and (max-width:1009px){
+  .hero{background:#F2ECF5;padding-block:38px}
+  .hero-inner{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"content" "media";
+    gap:24px;
+    direction:rtl;
+  }
+  .hero-content{
+    width:100%;
+    max-width:720px;
+    justify-self:stretch;
+    text-align:right;
+  }
+  .hero-content h1{font-size:clamp(30px,4.4vw,42px)}
+  .hero-content p{max-width:680px;font-size:14px;line-height:2;margin:13px 0 19px}
+  .hero-media{width:100%;min-height:0;aspect-ratio:16/9;border-radius:24px}
+}
