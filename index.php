@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Core\Router;
+use App\Services\CatalogService;
 use App\Services\PublicStorefrontService;
 
 require_once __DIR__ . '/app/Config/bootstrap.php';
@@ -16,11 +17,6 @@ $heroBanners = $storefront->banners();
 
 $router = new Router();
 
-/**
- * Home page
- *
- * All homepage sections are composed here in their intended display order.
- */
 $router->get('/', static function () use (
     $storeSettings,
     $categories,
@@ -28,11 +24,8 @@ $router->get('/', static function () use (
     $featuredProducts,
     $heroBanners
 ): void {
-    $pageTitle = 'موبایل مدیا'
-        . ' | ویترین دیجیتال موبایل و گجت';
-
+    $pageTitle = 'موبایل مدیا | ویترین دیجیتال موبایل و گجت';
     require_once BASE_PATH . '/partials/header.php';
-
     require_once BASE_PATH . '/partials/hero.php';
     require_once BASE_PATH . '/partials/trust-strip.php';
     require_once BASE_PATH . '/partials/categories.php';
@@ -41,16 +34,15 @@ $router->get('/', static function () use (
     require_once BASE_PATH . '/partials/services.php';
     require_once BASE_PATH . '/partials/about.php';
     require_once BASE_PATH . '/partials/contact-cta.php';
-
     require_once BASE_PATH . '/partials/footer.php';
 });
 
-$router->get('/catalog', static function () use (
-    $storeSettings,
-    $categories,
-    $products
-): void {
+$router->get('/catalog', static function () use ($storeSettings, $categories, $products): void {
     require BASE_PATH . '/pages/catalog.php';
+});
+
+$router->get('/product', static function () use ($storeSettings): void {
+    require BASE_PATH . '/pages/product.php';
 });
 
 $router->get('/about', static function () use ($storeSettings): void {

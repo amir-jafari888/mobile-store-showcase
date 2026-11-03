@@ -18,13 +18,22 @@ foreach ($fallbackSlides as $fallback) {
 if ($slides === []) $slides = $fallbackSlides;
 ?>
 <section class="hero" aria-label="بنرهای تصویری موبایل مدیا" data-hero-slider>
-  <h1><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h1>
+  <h1 class="hero-accessible-title"><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h1>
   <div class="hero-media" aria-live="off">
     <?php foreach ($slides as $index => $slide): ?>
       <div class="hero-slide<?= $index === 0 ? ' is-active' : '' ?>" data-hero-slide aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>">
         <?php if (!empty($slide['link_url'])): ?><a href="<?= e($slide['link_url']) ?>"><img src="<?= e(media_url((string) $slide['image_path'])) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>></a><?php else: ?><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>><?php endif; ?>
       </div>
     <?php endforeach; ?>
+  </div>
+  <div class="hero-copy container">
+    <span class="hero-kicker">MOBILE MEDIA / DIGITAL SHOWROOM</span>
+    <h2><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h2>
+    <p>انتخابی آگاهانه‌تر برای دنیای دیجیتال؛ محصولات را ببین، مقایسه کن و برای دریافت اطلاعات دقیق با ما در ارتباط باش.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="<?= e(url('catalog')) ?>">مشاهده کاتالوگ <span aria-hidden="true">←</span></a>
+      <a class="hero-secondary-link" href="<?= e(url('contact')) ?>">دریافت مشاوره</a>
+    </div>
   </div>
   <?php if (count($slides) > 1): ?>
     <div class="hero-controls" aria-label="کنترل اسلایدر">
