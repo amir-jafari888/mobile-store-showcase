@@ -8,9 +8,15 @@ export function initCatalogFilters() {
   const grid = document.querySelector('[data-catalog-grid]');
   const empty = document.querySelector('[data-catalog-empty]');
   const noResults = document.querySelector('[data-catalog-no-results]');
-  let selected = new URLSearchParams(window.location.search).get('category') || 'all';
+  const readCategory = () => new URLSearchParams(window.location.search).get('category') || 'all';
+  let selected = readCategory();
   if (!filters.some(button => button.dataset.filter === selected)) selected = 'all';
 
+  const syncFilters = () => filters.forEach(button => {
+    const active = button.dataset.filter === selected;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
   const render = () => {
     const term = (search?.value || '').trim().toLocaleLowerCase('fa');
     let visible = 0;
@@ -30,19 +36,21 @@ export function initCatalogFilters() {
     }
   };
 
-  filters.forEach(button => {
-    const active = button.dataset.filter === selected;
-    button.classList.toggle('is-active', active);
-    button.setAttribute('aria-pressed', String(active));
-    button.addEventListener('click', () => {
-      selected = button.dataset.filter;
-      filters.forEach(filter => {
-        const isActive = filter.dataset.filter === selected;
-        filter.classList.toggle('is-active', isActive);
-        filter.setAttribute('aria-pressed', String(isActive));
-      });
-      render();
-    });
+  syncFilters();
+  filters.forEach(button => button.addEventListener('click', () => {
+    selected = button.dataset.filter;
+    const nextUrl = new URL(window.location.href);
+    if (selected === 'all') nextUrl.searchParams.delete('category');
+    else nextUrl.searchParams.set('category', selected);
+    window.history.pushState({}, '', nextUrl);
+    syncFilters();
+    render();
+  }));
+  window.addEventListener('popstate', () => {
+    selected = readCategory();
+    if (!filters.some(button => button.dataset.filter === selected)) selected = 'all';
+    syncFilters();
+    render();
   });
   search?.addEventListener('input', render);
   sort?.addEventListener('change', render);
