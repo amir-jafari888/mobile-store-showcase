@@ -12,7 +12,6 @@ $storeName = $storeSettings['store_name'] ?? 'موبایل مدیا';
 <meta name="description" content="ویترین دیجیتال موبایل مدیا؛ محصولات موبایل و لوازم جانبی را بررسی کنید و برای موجودی و مشاوره با فروشگاه در ارتباط باشید.">
 <meta name="theme-color" content="#F8F6F9">
 <title><?= e($pageTitle) ?></title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css">
 <link rel="stylesheet" href="<?= e(asset('css/main.css')) ?>">
 </head>
 <body>
