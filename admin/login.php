@@ -24,7 +24,7 @@ $resolveNext = static function ($candidate) use ($adminHome): string {
         || isset($parts['user'])
         || isset($parts['pass'])
         || !str_starts_with((string) ($parts['path'] ?? ''), $adminHome)) {
-        return '/admin/';
+        return $adminHome;
     }
 
     return $candidate;
@@ -106,7 +106,7 @@ $pageTitle = 'ورود مدیر | پنل مدیریت';
         </div>
         <button class="admin-auth-submit" type="submit">ورود به پنل</button>
     </form>
-    <a class="admin-auth-back" href="/">بازگشت به وب‌سایت</a>
+    <a class="admin-auth-back" href="<?= e(url()) ?>">بازگشت به وب‌سایت</a>
 </main>
 </body>
 </html>
