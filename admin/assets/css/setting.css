@@ -162,3 +162,23 @@
 .admin-sidebar-note span{display:block;margin-top:4px;color:#51495b;font-size:11px;line-height:1.8}
 .admin-menu-toggle{min-height:44px;min-width:44px}
 .admin-nav a:focus-visible{outline:3px solid rgba(118,81,166,.45);outline-offset:2px}
+
+
+/* Admin account settings */
+.account-panel{max-width:920px}
+.account-section-title{display:flex;flex-direction:column;gap:4px;padding:15px 17px;border:1px solid #e4deea;border-radius:12px;background:#faf9fb}
+.account-section-title strong{font-size:14px;color:#30273a}
+.account-section-title span{font-size:12px;color:#62596d;line-height:1.8}
+.account-form{gap:20px 18px}
+.account-form>label{gap:9px}
+.account-form input{min-height:50px}
+.account-form input[dir="ltr"]{text-align:left}
+.account-form label small{font-size:12px;color:#62596d;line-height:1.8}
+.account-form .crud-actions{padding-top:8px}
+
+/* Keep the drawer controls available on every compact viewport. */
+@media(max-width:900px){
+  .admin-menu-toggle{display:grid!important;place-items:center;min-width:44px;min-height:44px}
+  .admin-menu-backdrop{display:block!important}
+  body.admin-menu-open{overflow:hidden}
+}
