@@ -16,3 +16,8 @@
 @media(min-width:601px) and (max-width:760px){
 .container{width:calc(100% - 36px)}.primary-nav a{font-size:10px;padding-inline:7px}.header-cta{font-size:10px;padding-inline:10px}.brand-name small{display:none}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-art{height:230px}.category-card{min-height:220px}.about-preview-inner{gap:20px}.about-photo{height:320px}.contact-layout{grid-template-columns:1fr}.contact-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.contact-cards article:last-child{grid-column:1/-1}
 }
+
+@media(min-width:601px) and (max-width:1009px){
+.site-header{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.product-card{border-radius:22px}
+}
