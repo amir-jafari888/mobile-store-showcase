@@ -582,3 +582,39 @@ img{display:block;max-width:100%}
   mix-blend-mode:normal;
   filter:none;
 }
+
+
+/* Hero typography: balanced scale across desktop, tablet, and mobile. */
+@media (min-width:1010px){
+  .hero-content h1{
+    font-size:clamp(42px,4.1vw,62px);
+    line-height:1.28;
+  }
+  .hero-content p{
+    font-size:17px;
+    line-height:2;
+    max-width:510px;
+  }
+}
+@media (min-width:601px) and (max-width:1009px){
+  .hero-content h1{
+    font-size:clamp(36px,4.2vw,44px);
+    line-height:1.32;
+  }
+  .hero-content p{
+    font-size:16px;
+    line-height:2;
+    max-width:100%;
+  }
+}
+@media (max-width:600px){
+  .hero-content h1{
+    font-size:clamp(30px,7vw,35px);
+    line-height:1.4;
+  }
+  .hero-content p{
+    font-size:15px;
+    line-height:2;
+    max-width:100%;
+  }
+}
