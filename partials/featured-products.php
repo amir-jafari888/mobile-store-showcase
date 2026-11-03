@@ -1,5 +1,7 @@
 <?php
 $featuredProducts = is_array($featuredProducts ?? null) ? $featuredProducts : [];
+$allProducts = is_array($products ?? null) ? $products : [];
+if ($featuredProducts === [] && $allProducts !== []) $featuredProducts = array_slice($allProducts, 0, 4);
 $productPreview = [
  ['name'=>'گوشی هوشمند سری Pro','category_name'=>'گوشی هوشمند','short_description'=>'نمایش نمونه برای بررسی چیدمان کارت محصول.','image_path'=>'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=82'],
  ['name'=>'هدفون بی‌سیم','category_name'=>'صوتی و تصویری','short_description'=>'نمونه محتوای تصویری برای ارزیابی ویترین.','image_path'=>'https://images.unsplash.com/photo-1505740420928-5e560c06d30?auto=format&fit=crop&w=900&q=82'],
