@@ -1,42 +1,41 @@
 @media(max-width:600px){
-  .admin-sidebar{position:fixed;inset:0 0 0 auto;width:min(330px,88vw);z-index:140;padding:20px 16px;transform:translateX(105%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.75,.25,1),visibility 0s linear .28s;box-shadow:var(--admin-shadow-lg);overflow-y:auto}
-  body.admin-menu-open .admin-sidebar{transform:translateX(0);visibility:visible;transition:transform .28s cubic-bezier(.2,.75,.25,1)}
-  .admin-main{margin:0;padding:17px 15px 22px}
-  .admin-topbar{justify-content:flex-start;gap:11px;margin-bottom:21px}
-  .admin-topbar>div{flex:1;min-width:0}
-  .admin-breadcrumb{font-size:10px}
-  .admin-topbar h1{font-size:20px}
-  .admin-topbar form{margin-right:auto}
-  .preview-badge{min-height:40px;padding:7px 12px;font-size:12px}
-  .admin-menu-toggle{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid var(--admin-border);border-radius:13px;background:#fff;color:var(--admin-ink);box-shadow:var(--admin-shadow-sm)}
-  .admin-menu-toggle svg{width:21px;height:21px}
-  .admin-menu-backdrop{display:block;position:fixed;z-index:130;inset:0;background:rgba(27,20,36,.52);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .22s,visibility 0s linear .22s}
-  body.admin-menu-open .admin-menu-backdrop{opacity:1;visibility:visible;transition:opacity .22s}
-  .admin-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:15px}
-  .admin-stats article{min-height:120px;padding:14px;border-radius:17px}
-  .admin-stats article>span,.admin-stats small{font-size:11px}
-  .admin-stats article>b{font-size:26px;margin:5px 0}
-  .admin-stats .status-text{font-size:16px}
-  .admin-panel{margin-bottom:15px;padding:17px;border-radius:19px}
-  .panel-heading h2{font-size:16px;margin-bottom:15px}
-  .panel-heading>div>span{font-size:11px}
-  .admin-shortcuts,.admin-shortcuts.storefront-shortcuts{grid-template-columns:1fr;gap:10px}
-  .admin-shortcuts a{min-height:128px;padding:15px}
-  .admin-shortcuts b{font-size:13px}
-  .admin-shortcuts small{font-size:11px}
-  .admin-checklist{grid-template-columns:1fr;gap:8px}
-  .admin-checklist li{font-size:12px}
-  .admin-footer{flex-direction:column;gap:4px;font-size:10px}
-  .crud-form{grid-template-columns:1fr;gap:15px}
-  .crud-form .wide,.crud-actions{grid-column:1}
-  .crud-form>label{font-size:12px}
-  .crud-form input:not([type=checkbox]),.crud-form select,.crud-form textarea{min-height:48px;font-size:16px}
-  .crud-form textarea{min-height:100px}
-  .crud-checks{align-items:flex-start;flex-direction:column;gap:10px}
-  .crud-checks label{min-height:40px;font-size:12px}
-  .crud-actions{flex-wrap:wrap}
-  .crud-actions .crud-button{flex:1}
-  .crud-table{min-width:650px}
-  .crud-table th,.crud-table td{padding:12px 10px}
-  .crud-alert{font-size:12px;padding:12px 14px}
+.admin-sidebar{position:fixed;inset:0 0 0 auto;width:min(320px,88vw);height:100dvh;z-index:140;padding:20px 16px 18px;transform:translateX(105%);visibility:hidden;overflow-y:auto;background:#fff;transition:transform .26s cubic-bezier(.2,.75,.25,1),visibility 0s linear .26s;box-shadow:-18px 0 48px rgba(28,20,38,.16)}
+body.admin-menu-open .admin-sidebar{transform:translateX(0);visibility:visible;transition:transform .26s cubic-bezier(.2,.75,.25,1)}
+.admin-main{margin:0;padding:17px 16px 24px}
+.admin-topbar{justify-content:flex-start;gap:11px;margin-bottom:21px}
+.admin-topbar>div{flex:1;min-width:0}
+.admin-breadcrumb{font-size:11px}
+.admin-topbar h1{font-size:21px}
+.admin-topbar form{margin-right:auto}
+.preview-badge{min-height:42px;padding:7px 13px;font-size:12px}
+.admin-menu-toggle{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid #ded6e6;border-radius:12px;background:#fff;color:#30273a;cursor:pointer}
+.admin-menu-toggle svg{width:21px;height:21px}
+.admin-menu-backdrop{display:block;position:fixed;z-index:130;inset:0;background:rgba(26,20,34,.48);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility 0s linear .2s}
+body.admin-menu-open .admin-menu-backdrop{opacity:1;visibility:visible;transition:opacity .2s ease}
+.admin-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:15px}
+.admin-stats article{min-height:118px;padding:14px}
+.admin-stats article>span{font-size:12px}
+.admin-stats article>b{font-size:25px;margin:6px 0}
+.admin-stats small{font-size:11px}
+.admin-panel{margin-bottom:15px;padding:17px;border-radius:16px}
+.panel-heading h2{font-size:16px;margin-bottom:15px}
+.admin-shortcuts,.admin-shortcuts.storefront-shortcuts{grid-template-columns:1fr;gap:10px}
+.admin-shortcuts a{min-height:118px;padding:15px}
+.admin-shortcuts b{font-size:14px}
+.admin-shortcuts small{font-size:12px}
+.admin-checklist{grid-template-columns:1fr;gap:8px}
+.admin-checklist li{font-size:12px}
+.admin-footer{flex-direction:column;gap:4px;font-size:11px}
+.crud-form{grid-template-columns:1fr;gap:16px}
+.crud-form .wide,.crud-actions{grid-column:1}
+.crud-form>label{font-size:14px}
+.crud-form input:not([type=checkbox]),.crud-form select,.crud-form textarea{min-height:48px;font-size:16px}
+.crud-form textarea{min-height:100px}
+.crud-checks{align-items:flex-start;flex-direction:column;gap:8px}
+.crud-checks label{min-height:44px;font-size:13px}
+.crud-actions{flex-wrap:wrap}
+.crud-actions .crud-button{flex:1}
+.crud-table{min-width:650px}
+.crud-table th,.crud-table td{padding:12px 10px}
+.crud-alert{font-size:12px;padding:12px 14px}
 }
