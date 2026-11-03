@@ -8,7 +8,7 @@ $fallbackSlides = [
 $slides = [];
 foreach ($heroBanners as $banner) {
   if (!empty($banner['image_path'])) {
-    $slides[] = ['image_path'=>$banner['image_path'],'title'=>$banner['title'] ?? 'موبایل مدیا'];
+    $slides[] = ['image_path'=>$banner['image_path'],'title'=>$banner['title'] ?? 'موبایل مدیا','link_url'=>$banner['link_url'] ?? ''];
   }
 }
 foreach ($fallbackSlides as $fallback) {
@@ -18,11 +18,11 @@ foreach ($fallbackSlides as $fallback) {
 if ($slides === []) $slides = $fallbackSlides;
 ?>
 <section class="hero" aria-label="بنرهای تصویری موبایل مدیا" data-hero-slider>
-  <h1>موبایل مدیا؛ دنیای موبایل و فناوری</h1>
+  <h1><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h1>
   <div class="hero-media" aria-live="off">
     <?php foreach ($slides as $index => $slide): ?>
       <div class="hero-slide<?= $index === 0 ? ' is-active' : '' ?>" data-hero-slide aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>">
-        <img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>>
+        <?php if (!empty($slide['link_url'])): ?><a href="<?= e($slide['link_url']) ?>"><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>></a><?php else: ?><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>><?php endif; ?>
       </div>
     <?php endforeach; ?>
   </div>
