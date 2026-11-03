@@ -1,4 +1,4 @@
-@import url(./setting.css?v=20261103-2);
-@import url(./mobile/admin-mobile.css?v=20261103-2) only screen and (max-width:600px);
-@import url(./tablet/admin-tablet.css?v=20261103-2) only screen and (min-width:601px) and (max-width:900px);
-@import url(./desktop/admin-desktop.css?v=20261103-2) only screen and (min-width:901px);
+@import url(./setting.css?v=20261103-3);
+@import url(./mobile/admin-mobile.css?v=20261103-3) only screen and (max-width:600px);
+@import url(./tablet/admin-tablet.css?v=20261103-3) only screen and (min-width:601px) and (max-width:900px);
+@import url(./desktop/admin-desktop.css?v=20261103-3) only screen and (min-width:901px);
