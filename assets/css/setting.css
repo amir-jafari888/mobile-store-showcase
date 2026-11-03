@@ -548,3 +548,37 @@ img{display:block;max-width:100%}
   letter-spacing:-.045em;
   white-space:nowrap;
 }
+
+
+/* Final hero surface override: remove the legacy directional veil on every viewport. */
+.hero{
+  background-color:#F2ECF5!important;
+  background-image:none!important;
+}
+.hero::before,
+.hero::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  opacity:0!important;
+}
+.hero-inner,
+.hero-content{
+  background:transparent!important;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  isolation:isolate;
+  opacity:1;
+  filter:none;
+  mix-blend-mode:normal;
+}
+.hero-media{
+  background:#F2ECF5!important;
+  box-shadow:0 18px 42px rgba(44,34,50,.09);
+}
+.hero-media img{
+  mix-blend-mode:normal;
+  filter:none;
+}
