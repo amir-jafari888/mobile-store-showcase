@@ -1,1 +1,1 @@
-</main><script type="module" src="/admin/assets/js/main.js"></script></body></html>
+</main><script type="module" src="<?= e(url('admin/assets/js/main.js')) ?>"></script></body></html>
