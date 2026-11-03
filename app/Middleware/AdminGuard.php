@@ -16,8 +16,8 @@ final class AdminGuard
             return;
         }
 
-        $next = $_SERVER['REQUEST_URI'] ?? '/admin/';
+        $next = $_SERVER['REQUEST_URI'] ?? \url('admin/');
         $query = http_build_query(['next' => $next]);
-        Response::redirect('/admin/login.php?' . $query);
+        Response::redirect(\url('admin/login.php') . '?' . $query);
     }
 }
