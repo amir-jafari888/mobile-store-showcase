@@ -21,3 +21,15 @@
 .site-header{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .product-card{border-radius:22px}
 }
+
+
+/* Tablet hero controls stay visible and thumb-friendly without changing desktop behavior. */
+@media(min-width:601px) and (max-width:1009px){
+  .hero{height:clamp(320px,43vw,440px)}
+  .hero-controls{right:24px;bottom:20px;gap:10px}
+  .hero-navigation{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+  .hero-arrow{width:40px;height:40px;font-size:20px}
+  .hero-dots{gap:7px;padding:5px 8px}
+  .hero-dot{width:7px;height:7px}
+  .hero-dot.is-active{width:23px}
+}
