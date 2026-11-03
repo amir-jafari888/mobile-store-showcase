@@ -15,7 +15,7 @@ if ($isCategoryPreview) $categories = $categoryPreview;
     <a class="category-card" href="<?= e(url('catalog?category=' . rawurlencode((string)($category['slug'] ?? '')))) ?>">
       <h3><?= e($category['name'] ?? '') ?></h3><p><?= e($category['description'] ?? '') ?></p>
       <span class="category-count"><?= $isCategoryPreview ? 'نمونه نمایشی' : 'مشاهده دسته' ?></span>
-      <?php if (!empty($category['image_path'])): ?><img class="category-image" src="<?= e($category['image_path']) ?>" alt="<?= e($category['name'] ?? '') ?>" loading="lazy"><?php endif; ?>
+      <?php if (!empty($category['image_path'])): ?><img class="category-image" src="<?= e(media_url((string) $category['image_path'])) ?>" alt="<?= e($category['name'] ?? '') ?>" loading="lazy"><?php endif; ?>
       <span class="category-link" aria-hidden="true">&gt;</span>
     </a>
   <?php endforeach; ?></div>
