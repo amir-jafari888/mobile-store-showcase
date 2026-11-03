@@ -1,12 +1,12 @@
 <?php
-$heroBanners=$heroBanners??[];$heroBanner=$heroBanners[0]??null;
-$heroTitle=$heroBanner['title']??'تکنولوژی را<br><em>از نزدیک ببین.</em>';
-$heroSubtitle=$heroBanner['subtitle']??'مدل‌های موبایل، گجت و لوازم جانبی را در یک ویترین ساده و دقیق ببین؛ برای موجودی، قیمت و خرید حضوری مستقیم با فروشگاه در ارتباط باش.';
-$heroImage=$heroBanner['image_path']??'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=85';
-$heroLink=$heroBanner['link_url']??url('catalog');
-
-if (is_string($heroLink) && str_starts_with($heroLink, '/') && !str_starts_with($heroLink, '//')) {
-    $heroLink = url($heroLink);
-}
+$heroBanners = $heroBanners ?? [];
+$heroBanner = $heroBanners[0] ?? null;
+$heroImage = $heroBanner['image_path'] ?? 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=2000';
+$heroAlt = $heroBanner['title'] ?? 'نمایی از محصولات موبایل مدیا';
 ?>
-<section class="hero"><div class="container hero-layout"><div class="hero-copy"><span class="eyebrow">ویترین دیجیتال فروشگاه</span><h1><?= $heroBanner?nl2br(e($heroTitle)):$heroTitle ?></h1><p><?= e($heroSubtitle) ?></p><div class="hero-actions"><a class="button button-primary" href="<?= e($heroLink) ?>">دیدن ویترین <span>←</span></a><a class="text-link" href="<?= e(url('contact')) ?>">اطلاعات فروشگاه</a></div><div class="hero-note"><span>01 / SHOWROOM</span><small>برای موجودی و قیمت با فروشگاه تماس بگیر.</small></div></div><div class="hero-visual"><div class="hero-photo"><img src="<?= e($heroImage) ?>" alt="<?= e($heroBanner['title']??'ویترین محصولات فروشگاه') ?>"></div><span class="hero-stamp">MOBILE / GADGET / ACCESSORY</span><span class="hero-index">DIGITAL WINDOW — 2026</span></div></div><div class="hero-bottom-line"></div></section>
+<section class="hero" aria-label="ویترین تصویری موبایل مدیا">
+  <div class="hero-media">
+    <img src="<?= e($heroImage) ?>" alt="<?= e($heroAlt) ?>" fetchpriority="high">
+  </div>
+  <div class="hero-frame" aria-hidden="true"><span>MM / MOBILE MEDIA</span><span>TECHNOLOGY, UP CLOSE</span></div>
+</section>
