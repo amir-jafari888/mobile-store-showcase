@@ -1,40 +1,30 @@
 <?php
 $heroBanners = is_array($heroBanners ?? null) ? $heroBanners : [];
-$fallbackSlides = [
-  ['image_path'=>'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=2200&q=88','title'=>'تجربه‌ای نزدیک‌تر به فناوری'],
-  ['image_path'=>'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=2200&q=88','title'=>'دنیای تلفن‌های هوشمند'],
-  ['image_path'=>'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2200&q=88','title'=>'اکوسیستم ابزارهای دیجیتال'],
-];
-$slides = [];
+$heroBanner = null;
 foreach ($heroBanners as $banner) {
   if (!empty($banner['image_path'])) {
-    $slides[] = ['image_path'=>$banner['image_path'],'title'=>$banner['title'] ?? 'موبایل مدیا','link_url'=>$banner['link_url'] ?? ''];
+    $heroBanner = $banner;
+    break;
   }
 }
-foreach ($fallbackSlides as $fallback) {
-  if (count($slides) >= 4) break;
-  if (count($slides) < 3) $slides[] = $fallback;
-}
-if ($slides === []) $slides = $fallbackSlides;
+$heroImage = $heroBanner
+  ? media_url((string) $heroBanner['image_path'])
+  : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1400&q=88';
+$heroTitle = trim((string) ($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری'));
+$heroDescription = trim((string) ($storeSettings['hero_description'] ?? 'جدیدترین محصولات دنیای موبایل و لوازم دیجیتال را در ویترین موبایل مدیا ببینید.'));
+$heroCtaUrl = !empty($heroBanner['link_url']) ? (string) $heroBanner['link_url'] : url('catalog');
+$heroImageAlt = (string) ($heroBanner['title'] ?? $heroTitle);
 ?>
-<section class="hero" aria-label="بنرهای تصویری موبایل مدیا" data-hero-slider>
-  <h1 class="hero-accessible-title"><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h1>
-  <div class="hero-media swiper" aria-live="off">
-    <div class="swiper-wrapper">
-    <?php foreach ($slides as $index => $slide): ?>
-      <div class="hero-slide swiper-slide">
-        <?php if (!empty($slide['link_url'])): ?><a href="<?= e($slide['link_url']) ?>"><img src="<?= e(media_url((string) $slide['image_path'])) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>></a><?php else: ?><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>><?php endif; ?>
-      </div>
-    <?php endforeach; ?>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero-inner">
+    <div class="hero-media">
+      <img src="<?= e($heroImage) ?>" alt="<?= e($heroImageAlt) ?>" fetchpriority="high">
+    </div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">MOBILE MEDIA</span>
+      <h1 id="hero-title"><?= e($heroTitle) ?></h1>
+      <p><?= e($heroDescription) ?></p>
+      <a class="button hero-cta" href="<?= e($heroCtaUrl) ?>">مشاهده محصولات <span aria-hidden="true">←</span></a>
     </div>
   </div>
-  <?php if (count($slides) > 1): ?>
-    <div class="hero-controls" aria-label="کنترل اسلایدر">
-      <div class="hero-navigation" role="group" aria-label="جابجایی بین بنرها">
-        <button class="hero-arrow" type="button" data-hero-prev aria-label="بنر قبلی">‹</button>
-        <button class="hero-arrow" type="button" data-hero-next aria-label="بنر بعدی">›</button>
-      </div>
-      <div class="hero-dots swiper-pagination" aria-label="انتخاب بنر"></div>
-    </div>
-  <?php endif; ?>
 </section>
