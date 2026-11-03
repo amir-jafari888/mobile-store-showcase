@@ -6,9 +6,9 @@ A calm, premium digital showroom for a physical mobile and accessories store. Th
 ## Color palette
 | Token | Hex | Role |
 | --- | --- | --- |
-| Primary | #9D70B0 | Primary actions and interactive states |
+| Primary | #80568F | Accessible primary actions and interactive states |
 | Primary dark | #704B82 | High-contrast accents and active states |
-| Lilac | #B58BC6 | Brand highlight and decorative accents |
+| Lilac | #9D70B0 | Brand highlight and decorative accents |
 | Pale lilac | #EEE3F2 | Selected and soft-emphasis surfaces |
 | Background | #F8F6F9 | Main canvas |
 | Surface | #FFFFFF | Cards and content surfaces |
