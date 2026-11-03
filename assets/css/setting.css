@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
 :root{
   color-scheme:light;
-  --color-primary:#9D70B0;--color-primary-dark:#704B82;--color-primary-light:#EEE3F2;
-  --color-accent:#9D70B0;--color-accent-hover:#704B82;
+  --color-primary:#80568F;--color-primary-dark:#704B82;--color-primary-light:#EEE3F2;
+  --color-accent:#704B82;--color-accent-hover:#5B3B6B;
   --color-background:#F8F6F9;--color-surface:#FFFFFF;--color-surface-secondary:#F1EDF3;
   --color-text-primary:#261F2B;--color-text-secondary:#716878;--color-text-muted:#98909D;
   --color-border:#E8E1EB;--color-success:#34745C;--color-warning:#A66C27;--color-error:#B34F61;--color-info:#5E719E;
