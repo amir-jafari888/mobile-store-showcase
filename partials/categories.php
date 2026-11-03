@@ -10,7 +10,7 @@ $isCategoryPreview = $categories === [];
 if ($isCategoryPreview) $categories = $categoryPreview;
 ?>
 <section class="section categories-section"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">دسته‌بندی محصولات</span><h2>فناوری را از مسیر خودش پیدا کن.</h2><p class="section-lead">دسته‌های مختلف را مرور کن و مستقیم سراغ محصول موردنظرت برو.</p></div><a class="text-link" href="<?= e(url('catalog')) ?>">مشاهده محصولات <span aria-hidden="true">&gt;</span></a></div>
+  <div class="section-heading"><div><span class="eyebrow">دسته‌بندی محصولات</span><h2>فناوری را از مسیر خودش پیدا کن.</h2><p class="section-lead">دسته‌های مختلف را مرور کن و مستقیم سراغ محصول موردنظرت برو.</p></div><a class="text-link" href="<?= e(url('catalog')) ?>"><span aria-hidden="true">&gt;</span> مشاهده محصولات</a></div>
   <div class="category-grid"><?php foreach ($categories as $category): ?>
     <a class="category-card" href="<?= e(url('catalog?category=' . rawurlencode((string)($category['slug'] ?? '')))) ?>">
       <h3><?= e($category['name'] ?? '') ?></h3><p><?= e($category['description'] ?? '') ?></p>
