@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 require_once dirname(__DIR__).'/app/Config/bootstrap.php';
-use App\\Core\\Database;
-use App\\Middleware\\AdminGuard;
-use App\\Services\\AuthService;
-use App\\Services\\AdminCatalogService;
+use App\Core\Database;
+use App\Middleware\AdminGuard;
+use App\Services\AuthService;
+use App\Services\AdminCatalogService;
 AdminGuard::require();
 $admin=(new AuthService())->admin()??[];$name=(string)($admin['name']??'مدیر');$email=(string)($admin['email']??'');
 $ready=Database::configured();$pc=$cc=0;
@@ -12,8 +12,8 @@ if($ready){try{$s=new AdminCatalogService();$pc=count($s->products());$cc=count(
 ?>
 <!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>داشبورد مدیریت</title><link rel="stylesheet" href="<?= e(url('admin/assets/css/main.css')) ?>"></head><body class="admin-body">
 <aside class="admin-sidebar" id="admin-sidebar"><a class="admin-brand" href="<?= e(url()) ?>"><span>M</span><div>موبایل‌استور<small>مدیریت محتوا</small></div></a><div class="admin-sidebar-note"><strong>مرکز مدیریت فروشگاه</strong><span>از این بخش می‌توانید ویترین، کاتالوگ و محتوای سایت را مدیریت کنید.</span></div><nav class="admin-nav" aria-label="ناوبری پنل"><span class="nav-caption">مدیریت فروشگاه</span><a class="active" href="<?= e(url('admin/')) ?>">▦　نمای کلی</a><a href="<?= e(url('admin/products.php')) ?>">▣　محصولات</a><a href="<?= e(url('admin/categories.php')) ?>">▤　دسته‌بندی‌ها</a><a href="<?= e(url('admin/banners.php')) ?>">▧　بنرها</a><a href="<?= e(url('admin/settings.php')) ?>">⚙　محتوا و تنظیمات لندینگ</a><span class="nav-caption">سیستم</span><a href="<?= e(url()) ?>">↗　مشاهده وب‌سایت</a></nav><div class="sidebar-foot">نسخه پنل 1.2</div></aside>
-<div class="admin-menu-backdrop" data-admin-menu-close hidden></div>
-<main class="admin-main"><header class="admin-topbar"><button class="admin-menu-toggle" type="button" aria-label="باز کردن منوی مدیریت" aria-controls="admin-sidebar" aria-expanded="false" data-admin-menu-toggle><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div><span class="admin-breadcrumb">پنل مدیریت /</span><h1>نمای کلی</h1></div><form method="post" action="<?= e(url('admin/logout.php')) ?>"><input type="hidden" name="_csrf" value="<?=e(\\App\\Middleware\\Csrf::token())?>"><button class="preview-badge" type="submit">خروج</button></form></header>
+<div class="admin-menu-backdrop" data-admin-menu-close></div>
+<main class="admin-main"><header class="admin-topbar"><button class="admin-menu-toggle" type="button" aria-label="باز کردن منوی مدیریت" aria-controls="admin-sidebar" aria-expanded="false" data-admin-menu-toggle><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div><span class="admin-breadcrumb">پنل مدیریت /</span><h1>نمای کلی</h1></div><form method="post" action="<?= e(url('admin/logout.php')) ?>"><input type="hidden" name="_csrf" value="<?=e(\App\Middleware\Csrf::token())?>"><button class="preview-badge" type="submit">خروج</button></form></header>
 <?php if(!$ready):?><div class="admin-alert"><b>!</b><div><strong>دیتابیس آماده نیست</strong><p>تنظیمات DB را تکمیل و migration پایه را اجرا کنید.</p></div></div><?php endif;?>
 <section class="admin-stats"><article><span>تعداد محصولات</span><b><?=$ready?$pc:'—'?></b><small>محصولات ثبت‌شده</small></article><article><span>دسته‌بندی‌ها</span><b><?=$ready?$cc:'—'?></b><small>گروه‌های ثبت‌شده</small></article><article><span>وضعیت پنل</span><b class="status-text">فعال</b><small>مدیر احراز هویت شده</small></article><article><span>وضعیت دیتابیس</span><b class="status-text"><?=$ready?'متصل':'نامشخص'?></b><small>بر اساس تنظیمات فعلی</small></article></section>
 <section class="admin-panel"><div class="panel-heading"><div><span>مدیریت کاتالوگ</span><h2>دسترسی سریع</h2></div></div><div class="admin-shortcuts"><a href="<?= e(url('admin/products.php')) ?>"><i>▣</i><b>محصولات</b><small>ایجاد، ویرایش و حذف محصولات</small><span>←</span></a><a href="<?= e(url('admin/categories.php')) ?>"><i>▤</i><b>دسته‌بندی‌ها</b><small>مدیریت گروه‌های محصول</small><span>←</span></a></div></section>
