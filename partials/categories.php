@@ -9,15 +9,39 @@ $categoryPreview = [
 $isCategoryPreview = $categories === [];
 if ($isCategoryPreview) $categories = $categoryPreview;
 ?>
-<section class="section categories-section"><div class="container">
-  <div class="section-heading"><div><span class="eyebrow">دسته‌بندی محصولات</span><h2><?= e($storeSettings['categories_title'] ?? 'فناوری را از مسیر خودش پیدا کن.') ?></h2><p class="section-lead"><?= e($storeSettings['categories_description'] ?? 'دسته‌های مختلف را مرور کن و مستقیم سراغ محصول موردنظرت برو.') ?></p></div><a class="text-link" href="<?= e(url('catalog')) ?>"><span aria-hidden="true">&gt;</span> مشاهده محصولات</a></div>
-  <div class="category-grid"><?php foreach ($categories as $category): ?>
-    <a class="category-card" href="<?= e(url('catalog?category=' . rawurlencode((string)($category['slug'] ?? '')))) ?>">
-      <h3><?= e($category['name'] ?? '') ?></h3><p><?= e($category['description'] ?? '') ?></p>
-      <span class="category-count"><?= $isCategoryPreview ? 'نمونه نمایشی' : 'مشاهده دسته' ?></span>
-      <?php if (!empty($category['image_path'])): ?><img class="category-image" src="<?= e(media_url((string) $category['image_path'])) ?>" alt="<?= e($category['name'] ?? '') ?>" loading="lazy"><?php endif; ?>
-      <span class="category-link" aria-hidden="true">&gt;</span>
-    </a>
-  <?php endforeach; ?></div>
-  <?php if ($isCategoryPreview): ?><p class="content-disclaimer">محتوای این بخش نمونه نمایشی است و با ثبت دسته‌بندی‌های واقعی جایگزین می‌شود.</p><?php endif; ?>
-</div></section>
+<section class="section categories-section">
+  <div class="container">
+    <div class="category-heading-bar">
+      <h2><?= e($storeSettings['categories_title'] ?? 'دسته‌بندی محصولات') ?></h2>
+      <div class="category-heading-actions">
+        <div class="category-slider-controls" aria-label="کنترل اسلایدر دسته‌بندی">
+          <button class="category-slider-arrow" type="button" data-category-prev aria-label="دسته قبلی" disabled><span aria-hidden="true">›</span></button>
+          <button class="category-slider-arrow" type="button" data-category-next aria-label="دسته بعدی"><span aria-hidden="true">‹</span></button>
+        </div>
+        <a class="category-view-all" href="<?= e(url('catalog')) ?>">مشاهده <span aria-hidden="true">&gt;</span></a>
+      </div>
+    </div>
+
+    <div class="category-slider" data-category-slider>
+      <div class="category-track" data-category-track role="list" aria-label="دسته‌بندی‌های محصولات">
+        <?php foreach ($categories as $category): ?>
+          <a class="category-card" role="listitem" href="<?= e(url('catalog?category=' . rawurlencode((string)($category['slug'] ?? '')))) ?>">
+            <span class="category-card-copy">
+              <span class="category-card-title"><?= e($category['name'] ?? '') ?></span>
+              <?php if (!empty($category['description'])): ?><span class="category-card-description"><?= e($category['description']) ?></span><?php endif; ?>
+              <span class="category-card-cta">مشاهده دسته <span aria-hidden="true">←</span></span>
+            </span>
+            <?php if (!empty($category['image_path'])): ?>
+              <span class="category-card-visual">
+                <img src="<?= e(media_url((string)$category['image_path'])) ?>" alt="" loading="lazy">
+              </span>
+            <?php else: ?>
+              <span class="category-card-visual category-card-visual-empty" aria-hidden="true"><span>MM</span></span>
+            <?php endif; ?>
+          </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <?php if ($isCategoryPreview): ?><p class="content-disclaimer">محتوای این بخش نمونه نمایشی است و با ثبت دسته‌بندی‌های واقعی جایگزین می‌شود.</p><?php endif; ?>
+  </div>
+</section>
