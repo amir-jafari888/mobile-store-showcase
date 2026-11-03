@@ -1,4 +1,1 @@
-@media(min-width:901px){
-  .admin-sidebar{width:276px}
-  .admin-main{margin-right:276px}
-}
+@media(min-width:901px){.admin-sidebar{width:272px}.admin-main{margin-right:272px}.admin-menu-toggle,.admin-menu-backdrop{display:none!important}}
