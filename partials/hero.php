@@ -26,25 +26,17 @@ if ($slides === []) $slides = $fallbackSlides;
       </div>
     <?php endforeach; ?>
   </div>
-  <div class="hero-copy container">
-    <span class="hero-kicker">MOBILE MEDIA / DIGITAL SHOWROOM</span>
-    <h2><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h2>
-    <p>انتخابی آگاهانه‌تر برای دنیای دیجیتال؛ محصولات را ببین، مقایسه کن و برای دریافت اطلاعات دقیق با ما در ارتباط باش.</p>
-    <div class="hero-actions">
-      <a class="button button-primary" href="<?= e(url('catalog')) ?>">مشاهده کاتالوگ <span aria-hidden="true">←</span></a>
-      <a class="hero-secondary-link" href="<?= e(url('contact')) ?>">دریافت مشاوره</a>
-    </div>
-  </div>
   <?php if (count($slides) > 1): ?>
     <div class="hero-controls" aria-label="کنترل اسلایدر">
-      <button class="hero-arrow" type="button" data-hero-prev aria-label="بنر قبلی">‹</button>
-      <button class="hero-pause" type="button" data-hero-toggle aria-label="توقف پخش خودکار بنرها" aria-pressed="false">Ⅱ</button>
+      <div class="hero-navigation" role="group" aria-label="جابجایی بین بنرها">
+        <button class="hero-arrow" type="button" data-hero-prev aria-label="بنر قبلی">‹</button>
+        <button class="hero-arrow" type="button" data-hero-next aria-label="بنر بعدی">›</button>
+      </div>
       <div class="hero-dots" role="group" aria-label="انتخاب بنر">
         <?php foreach ($slides as $index => $_slide): ?>
           <button class="hero-dot<?= $index === 0 ? ' is-active' : '' ?>" type="button" data-hero-dot="<?= $index ?>" aria-label="نمایش بنر <?= $index + 1 ?>" aria-pressed="<?= $index === 0 ? 'true' : 'false' ?>"></button>
         <?php endforeach; ?>
       </div>
-      <button class="hero-arrow" type="button" data-hero-next aria-label="بنر بعدی">›</button>
     </div>
   <?php endif; ?>
 </section>
