@@ -1,2 +1,20 @@
-<?php $storeSettings=$storeSettings??[];$storeName=$storeSettings['store_name']??'موبایل‌استور'; ?>
-<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-light" href="<?= e(url()) ?>"><span class="brand-mark">M</span><span><?= e($storeName) ?><small>DIGITAL SHOWROOM</small></span></a><p>ویترین دیجیتال فروشگاه موبایل و لوازم جانبی؛ برای خرید و موجودی با فروشگاه در ارتباط باشید.</p></div><div><h3>مسیرها</h3><a href="<?= e(url()) ?>">خانه</a><a href="<?= e(url('catalog')) ?>">کاتالوگ</a><a href="<?= e(url('about')) ?>">درباره فروشگاه</a><a href="<?= e(url('contact')) ?>">تماس و مراجعه</a></div><div><h3>ارتباط</h3><?php if(!empty($storeSettings['phone'])): ?><a href="tel:<?= e(preg_replace('/[^0-9+]/','',$storeSettings['phone'])) ?>"><?= e($storeSettings['phone']) ?></a><?php endif; ?><?php if(!empty($storeSettings['address'])): ?><span><?= e($storeSettings['address']) ?></span><?php endif; ?><?php if(!empty($storeSettings['opening_hours'])): ?><span><?= e($storeSettings['opening_hours']) ?></span><?php endif; ?><?php if(empty($storeSettings['phone'])&&empty($storeSettings['address'])&&empty($storeSettings['opening_hours'])): ?><span>اطلاعات تماس هنوز ثبت نشده است.</span><?php endif; ?></div></div><div class="container footer-bottom"><span>© 2026 <?= e($storeName) ?></span></div></footer></main><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><script type="module" src="<?= e(asset('js/main.js')) ?>"></script></body></html>
+<?php $storeSettings=$storeSettings??[]; ?>
+<footer class="site-footer">
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a class="brand brand-light" href="<?= e(url()) ?>"><span class="brand-mark" aria-hidden="true">M</span><span class="brand-name">موبایل مدیا<small>MOBILE MEDIA</small></span></a>
+      <p>ویترین موبایل، گجت و لوازم جانبی؛ محصولات را بشناس، سؤال‌هایت را بپرس و برای بررسی حضوری با ما در ارتباط باش.</p>
+    </div>
+    <div><h3>دسترسی سریع</h3><a href="<?= e(url()) ?>">خانه</a><a href="<?= e(url('catalog')) ?>">کاتالوگ محصولات</a><a href="<?= e(url('about')) ?>">درباره ما</a><a href="<?= e(url('contact')) ?>">تماس با ما</a></div>
+    <div><h3>ارتباط با فروشگاه</h3>
+      <?php if(!empty($storeSettings['phone'])): ?><a href="tel:<?= e(preg_replace('/[^0-9+]/','',$storeSettings['phone'])) ?>"><?= e($storeSettings['phone']) ?></a><?php endif; ?>
+      <?php if(!empty($storeSettings['address'])): ?><span><?= e($storeSettings['address']) ?></span><?php endif; ?>
+      <?php if(!empty($storeSettings['opening_hours'])): ?><span><?= e($storeSettings['opening_hours']) ?></span><?php endif; ?>
+      <?php if(empty($storeSettings['phone'])&&empty($storeSettings['address'])&&empty($storeSettings['opening_hours'])): ?><span>اطلاعات تماس هنوز ثبت نشده است.</span><?php endif; ?>
+    </div>
+  </div>
+  <div class="container footer-bottom"><span>© 2026 موبایل مدیا</span><span>ویترین دیجیتال محصولات</span></div>
+</footer>
+</main>
+<script type="module" src="<?= e(asset('js/main.js')) ?>"></script>
+</body></html>
