@@ -8,13 +8,10 @@ function e(mixed $value): string
 
 /**
  * Resolve the application root even when a PHP entry point lives in /admin.
- * Examples:
- *   /mobile-store-showcase/index.php       -> /mobile-store-showcase
- *   /mobile-store-showcase/admin/login.php -> /mobile-store-showcase
  */
 function app_base_path(): string
 {
-    $scriptName = str_replace('\\\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/index.php'));
+    $scriptName = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/index.php'));
     $directory = dirname($scriptName);
 
     if ($directory === '.' || $directory === '/') {
