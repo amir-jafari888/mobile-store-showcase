@@ -1,1 +1,4 @@
-<section class="contact-cta"><div class="container cta-inner"><div><span class="eyebrow">04 / VISIT</span><h2>محصول را ببین.<br>بعد تصمیم بگیر.</h2><p>برای موجودی، قیمت و ساعت کاری اطلاعات دقیق از فروشگاه بگیر؛ موبایل مدیا ویترین و مسیر ارتباط تو با فروشگاه است.</p></div><div class="cta-actions"><a class="button button-light" href="<?= e(url('contact')) ?>">اطلاعات تماس</a><a class="button button-dark" href="<?= e(url('catalog')) ?>">کاتالوگ محصولات</a></div><span class="cta-decoration" aria-hidden="true">M</span></div></section>
+<section class="contact-cta"><div class="container cta-inner">
+  <div><span class="eyebrow">ارتباط با موبایل مدیا</span><h2>برای انتخاب بهتر،<br>گفت‌وگو را شروع کن.</h2><p>برای دریافت اطلاعات محصول، قیمت و موجودی یا هماهنگی مراجعه، با موبایل مدیا در ارتباط باش.</p></div>
+  <div class="cta-actions"><a class="button button-light" href="<?= e(url('contact')) ?>">اطلاعات تماس</a><a class="button button-dark" href="<?= e(url('catalog')) ?>">مشاهده محصولات</a></div>
+</div></section>
