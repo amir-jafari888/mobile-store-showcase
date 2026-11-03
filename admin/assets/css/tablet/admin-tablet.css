@@ -1,14 +1,12 @@
 @media(min-width:601px) and (max-width:900px){
-  .admin-sidebar{width:min(330px,86vw);z-index:140;transform:translateX(105%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.75,.25,1),visibility 0s linear .28s;box-shadow:var(--admin-shadow-lg)}
-  body.admin-menu-open .admin-sidebar{transform:translateX(0);visibility:visible;transition:transform .28s cubic-bezier(.2,.75,.25,1)}
-  .admin-main{margin-right:0;padding:25px 26px 24px}
-  .admin-menu-toggle{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;padding:0;border:1px solid var(--admin-border);border-radius:14px;background:#fff;color:var(--admin-ink);box-shadow:var(--admin-shadow-sm)}
-  .admin-menu-toggle svg{width:22px;height:22px}
-  .admin-menu-backdrop{display:block;position:fixed;z-index:130;inset:0;background:rgba(27,20,36,.52);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .22s,visibility 0s linear .22s}
-  body.admin-menu-open .admin-menu-backdrop{opacity:1;visibility:visible;transition:opacity .22s}
-  .admin-topbar{justify-content:flex-start}
-  .admin-topbar>div{flex:1}
-  .admin-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .admin-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .admin-panel{padding:22px}
+.admin-sidebar{position:fixed;inset:0 0 0 auto;width:min(320px,84vw);height:100dvh;z-index:140;transform:translateX(105%);visibility:hidden;overflow-y:auto;background:#fff;transition:transform .26s cubic-bezier(.2,.75,.25,1),visibility 0s linear .26s;box-shadow:-18px 0 48px rgba(28,20,38,.16)}
+body.admin-menu-open .admin-sidebar{transform:translateX(0);visibility:visible;transition:transform .26s cubic-bezier(.2,.75,.25,1)}
+.admin-main{margin-right:0;padding:25px 26px 24px}
+.admin-menu-toggle{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;padding:0;border:1px solid #ded6e6;border-radius:12px;background:#fff;color:#30273a;cursor:pointer}
+.admin-menu-toggle svg{width:22px;height:22px}
+.admin-menu-backdrop{display:block;position:fixed;z-index:130;inset:0;background:rgba(26,20,34,.48);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility 0s linear .2s}
+body.admin-menu-open .admin-menu-backdrop{opacity:1;visibility:visible;transition:opacity .2s ease}
+.admin-topbar{justify-content:flex-start}.admin-topbar>div{flex:1}
+.admin-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.admin-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
