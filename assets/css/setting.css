@@ -931,3 +931,14 @@ img{display:block;max-width:100%}
   .product-track{grid-auto-columns:86%}
   .featured-section .product-art{height:190px}
 }
+
+
+/* Product pricing — consistent storefront and detail-page hierarchy. */
+.featured-section .product-info .product-card-price{display:flex;align-items:baseline;gap:6px;margin-top:12px;color:#302638;direction:rtl}
+.featured-section .product-info .product-card-price strong{font-size:17px;font-weight:900;line-height:1.5;color:#52366f;font-variant-numeric:tabular-nums}
+.featured-section .product-info .product-card-price span{font-size:10px;font-weight:700;color:#62596d}
+.featured-section .product-info .product-card-price.is-unpriced{font-size:10px;font-weight:700;color:#62596d;line-height:1.8}
+.product-detail-price{display:flex;align-items:baseline;gap:8px;margin:18px 0 22px;padding:16px 18px;border:1px solid #e7deef;border-radius:14px;background:#f8f4fb;color:#52366f}
+.product-detail-price strong{font-size:clamp(22px,3vw,30px);font-weight:900;line-height:1.4;font-variant-numeric:tabular-nums}
+.product-detail-price span{font-size:13px;font-weight:800;color:#62596d}
+@media(max-width:600px){.featured-section .product-info .product-card-price strong{font-size:16px}.product-detail-price{margin:15px 0;padding:13px 15px}}
