@@ -54,3 +54,34 @@
   .hero-content h1{font-size:27px}
   .hero-media{aspect-ratio:1.12/1}
 }
+
+
+/* Mobile hero: copy and CTA stay above the image in normal document flow. */
+@media(max-width:600px){
+  .hero{min-height:0;background:#F2ECF5;padding:28px 0 32px}
+  .hero-inner{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"content" "media";
+    gap:18px;
+    direction:rtl;
+  }
+  .hero-content{
+    width:100%;
+    max-width:none;
+    justify-self:stretch;
+    text-align:right;
+  }
+  .hero-eyebrow{margin-bottom:8px;font-size:9px}
+  .hero-content h1{font-size:clamp(27px,7.4vw,36px);line-height:1.42}
+  .hero-content p{max-width:none;margin:10px 0 16px;font-size:12px;line-height:1.95}
+  .hero-cta{min-height:44px;padding-inline:18px;font-size:12px}
+  .hero-media{width:100%;min-height:0;aspect-ratio:1.35/1;border-radius:20px}
+  .hero-media::before{inset:8px;border-radius:13px}
+}
+@media(max-width:380px){
+  .hero{padding-block:24px 28px}
+  .hero-inner{gap:15px}
+  .hero-content h1{font-size:26px}
+  .hero-media{aspect-ratio:1.2/1}
+}
