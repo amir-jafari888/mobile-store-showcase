@@ -41,8 +41,6 @@
 .service-grid article>span,.benefit-list article>b,.about-facts strong{display:none}
 .benefit-list article{grid-template-columns:1fr}
 .about-facts span{display:block;font-size:14px;color:var(--ink);font-weight:700}
-.hero-pause{width:40px;height:40px;border:1px solid rgba(255,255,255,.52);border-radius:50%;background:rgba(25,22,31,.38);color:#fff;font-size:13px;backdrop-filter:blur(8px);transition:background var(--transition),transform var(--transition)}
-.hero-pause:hover{background:var(--accent);transform:scale(1.05)}
 
 
 /* Lilac visual layer — applied over the active backend storefront structure */
@@ -66,7 +64,7 @@
 .page-hero{background:linear-gradient(125deg,#F1EAF4,#EEE3F2)}
 .catalog-preview-note{background:#F1EAF4;color:#4C4054}
 .demo-note{color:var(--color-primary-dark)}
-.hero-arrow,.hero-pause{background:rgba(44,34,50,.38);backdrop-filter:blur(12px)}
+.hero-arrow{background:rgba(44,34,50,.38);backdrop-filter:blur(12px)}
 @media(hover:hover){
 .product-card:hover{border-color:#D8C6E1}
 .category-card:hover{box-shadow:0 18px 42px rgba(44,34,50,.08)}
