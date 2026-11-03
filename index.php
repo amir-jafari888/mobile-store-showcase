@@ -24,6 +24,7 @@ $router = new Router();
 $router->get('/', static function () use (
     $storeSettings,
     $categories,
+    $products,
     $featuredProducts,
     $heroBanners
 ): void {
