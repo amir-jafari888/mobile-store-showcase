@@ -9,10 +9,12 @@ use App\Services\AuthService;
 
 $auth = new AuthService();
 
-$resolveNext = static function ($candidate): string {
+$adminHome = url('admin/');
+
+$resolveNext = static function ($candidate) use ($adminHome): string {
     if (!is_string($candidate) || $candidate === ''
         || preg_match('/[\x00-\x1F\x7F\\\\]/', $candidate)) {
-        return '/admin/';
+        return $adminHome;
     }
 
     $parts = parse_url($candidate);
@@ -21,7 +23,7 @@ $resolveNext = static function ($candidate): string {
         || isset($parts['host'])
         || isset($parts['user'])
         || isset($parts['pass'])
-        || !str_starts_with((string) ($parts['path'] ?? ''), '/admin/')) {
+        || !str_starts_with((string) ($parts['path'] ?? ''), $adminHome)) {
         return '/admin/';
     }
 
@@ -65,7 +67,7 @@ $pageTitle = 'ورود مدیر | پنل مدیریت';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
     <title><?= e($pageTitle) ?></title>
-    <link rel="stylesheet" href="/admin/assets/css/main.css">
+    <link rel="stylesheet" href="<?= e(url('admin/assets/css/main.css')) ?>">
     <style>
         .admin-auth-page{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--admin-bg,#f8fafc)}
         .admin-auth-card{width:min(100%,430px);background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:32px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
@@ -81,7 +83,7 @@ $pageTitle = 'ورود مدیر | پنل مدیریت';
 </head>
 <body class="admin-auth-page">
 <main class="admin-auth-card">
-    <a class="admin-auth-brand" href="/">
+    <a class="admin-auth-brand" href="<?= e(url()) ?>">
         <span>M</span><div><b>موبایل‌استور</b><small>پنل مدیریت</small></div>
     </a>
     <h1>ورود مدیر</h1>
@@ -91,7 +93,7 @@ $pageTitle = 'ورود مدیر | پنل مدیریت';
         <div class="admin-auth-error" role="alert"><?= e($errors[0]) ?></div>
     <?php endif; ?>
 
-    <form method="post" action="/admin/login.php">
+    <form method="post" action="<?= e(url('admin/login.php')) ?>">
         <input type="hidden" name="_csrf" value="<?= e(Csrf::token()) ?>">
         <input type="hidden" name="next" value="<?= e($next) ?>">
         <div class="admin-auth-field">
