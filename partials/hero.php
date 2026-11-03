@@ -19,12 +19,14 @@ if ($slides === []) $slides = $fallbackSlides;
 ?>
 <section class="hero" aria-label="بنرهای تصویری موبایل مدیا" data-hero-slider>
   <h1 class="hero-accessible-title"><?= e($storeSettings['hero_title'] ?? 'موبایل مدیا؛ دنیای موبایل و فناوری') ?></h1>
-  <div class="hero-media" aria-live="off">
+  <div class="hero-media swiper" aria-live="off">
+    <div class="swiper-wrapper">
     <?php foreach ($slides as $index => $slide): ?>
-      <div class="hero-slide<?= $index === 0 ? ' is-active' : '' ?>" data-hero-slide aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>">
+      <div class="hero-slide swiper-slide">
         <?php if (!empty($slide['link_url'])): ?><a href="<?= e($slide['link_url']) ?>"><img src="<?= e(media_url((string) $slide['image_path'])) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>></a><?php else: ?><img src="<?= e($slide['image_path']) ?>" alt="<?= e($slide['title']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>><?php endif; ?>
       </div>
     <?php endforeach; ?>
+    </div>
   </div>
   <?php if (count($slides) > 1): ?>
     <div class="hero-controls" aria-label="کنترل اسلایدر">
@@ -32,11 +34,7 @@ if ($slides === []) $slides = $fallbackSlides;
         <button class="hero-arrow" type="button" data-hero-prev aria-label="بنر قبلی">‹</button>
         <button class="hero-arrow" type="button" data-hero-next aria-label="بنر بعدی">›</button>
       </div>
-      <div class="hero-dots" role="group" aria-label="انتخاب بنر">
-        <?php foreach ($slides as $index => $_slide): ?>
-          <button class="hero-dot<?= $index === 0 ? ' is-active' : '' ?>" type="button" data-hero-dot="<?= $index ?>" aria-label="نمایش بنر <?= $index + 1 ?>" aria-pressed="<?= $index === 0 ? 'true' : 'false' ?>"></button>
-        <?php endforeach; ?>
-      </div>
+      <div class="hero-dots swiper-pagination" aria-label="انتخاب بنر"></div>
     </div>
   <?php endif; ?>
 </section>
