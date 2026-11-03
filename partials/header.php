@@ -27,7 +27,7 @@ $pageTitle = $pageTitle ?? 'موبایل مدیا';
       <a href="<?= e(url('contact')) ?>">تماس با ما</a>
     </nav>
     <div class="header-actions">
-      <a class="header-cta" href="<?= e(url('contact')) ?>">مشاوره و تماس <span aria-hidden="true">↗</span></a>
+      <a class="header-cta" href="<?= e(url('contact')) ?>">مشاوره و تماس</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="باز کردن منو">
         <span></span><span></span>
       </button>
