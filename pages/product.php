@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $slug = trim((string) ($_GET['slug'] ?? ''));
-$product = $slug !== '' ? (new \\App\\Services\\CatalogService())->findProductBySlug($slug) : null;
+$product = $slug !== '' ? (new \App\Services\CatalogService())->findProductBySlug($slug) : null;
 
 if ($product === null) {
     http_response_code(404);
@@ -10,7 +10,7 @@ if ($product === null) {
     return;
 }
 
-$pageTitle = e((string) ($product['name'] ?? 'محصول')) . ' | ' . e((string) ($storeSettings['store_name'] ?? 'موبایل مدیا'));
+$pageTitle = (string) ($product['name'] ?? 'محصول') . ' | ' . (string) ($storeSettings['store_name'] ?? 'موبایل مدیا');
 require BASE_PATH . '/partials/header.php';
 
 $productName = (string) ($product['name'] ?? 'محصول');

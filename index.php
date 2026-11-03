@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use App\Core\Router;
-use App\Services\CatalogService;
 use App\Services\PublicStorefrontService;
 
 require_once __DIR__ . '/app/Config/bootstrap.php';
