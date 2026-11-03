@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/app/Config/bootstrap.php';
 
-use App\\Core\\Response;
-use App\\Middleware\\Csrf;
-use App\\Services\\AuthService;
+use App\Core\Response;
+use App\Middleware\Csrf;
+use App\Services\AuthService;
 
 $auth = new AuthService();
 
@@ -13,7 +13,7 @@ $adminHome = url('admin/');
 
 $resolveNext = static function ($candidate) use ($adminHome): string {
     if (!is_string($candidate) || $candidate === ''
-        || preg_match('/[\\x00-\\x1F\\x7F\\\\\\\\]/', $candidate)) {
+        || preg_match('/[\x00-\x1F\x7F\\\\]/', $candidate)) {
         return $adminHome;
     }
 
