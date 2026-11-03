@@ -18,7 +18,7 @@ $pageTitle = $pageTitle ?? 'موبایل مدیا';
   <div class="container header-inner">
     <a class="brand" href="<?= e(url()) ?>" aria-label="صفحه اصلی موبایل مدیا">
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><path d="M9 28V12h4l7 9 7-9h4v16h-4V18l-7 9-7-9v10z" fill="currentColor"/></svg></span>
-      <span class="brand-name">موبایل مدیا<small>MOBILE MEDIA</small></span>
+      <span class="brand-name"><?= e($storeSettings['store_name'] ?? 'موبایل مدیا') ?><small>MOBILE MEDIA</small></span>
     </a>
     <nav id="primary-nav" class="primary-nav" aria-label="ناوبری اصلی">
       <a href="<?= e(url()) ?>">خانه</a>
