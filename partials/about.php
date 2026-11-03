@@ -1,1 +1,9 @@
-<section class="section about-preview"><div class="container about-preview-inner"><div class="about-photo"><img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=82" alt="فضای کاری و فناوری"></div><div class="about-copy"><span class="eyebrow">03 / THE STORE</span><h2>یک فروشگاه کوچک،<br>یک ویترین روشن.</h2><p>هدف این سایت فروش آنلاین نیست. اینجا قرار است قبل از مراجعه، فضای فروشگاه، دسته‌بندی محصولات و مسیر ارتباط را واضح ببینی و بعد برای بررسی حضوری تصمیم بگیری.</p><p>اطلاعات واقعی محصولات، تصاویر و مشخصات در فاز بعد از پنل مدیریت وارد می‌شوند.</p><div class="about-facts"><div><strong>01</strong><span>ویترین دیجیتال</span></div><div><strong>02</strong><span>بررسی حضوری</span></div><div><strong>03</strong><span>مشاوره انتخاب</span></div><div><strong>04</strong><span>ارتباط مستقیم</span></div></div></div></div></section>
+<section class="section about-preview"><div class="container about-preview-inner">
+  <div class="about-photo"><img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1400&q=88" alt="فضای فروش و تجربه انتخاب محصولات دیجیتال" loading="lazy"></div>
+  <div class="about-copy"><span class="eyebrow">درباره موبایل مدیا</span><h2>انتخاب فناوری،<br>با دیدی روشن‌تر.</h2>
+    <p>موبایل مدیا فضایی برای آشنایی با محصولات دیجیتال، مرور دسته‌بندی‌ها و دریافت راهنمایی پیش از انتخاب است.</p>
+    <p>مشخصات و تصاویر محصولات از طریق کاتالوگ به‌روزرسانی می‌شوند و برای اطلاع از قیمت و موجودی، امکان ارتباط مستقیم با مجموعه فراهم است.</p>
+    <div class="about-facts"><div><strong>۰۱</strong><span>مرور دسته‌بندی‌ها</span></div><div><strong>۰۲</strong><span>بررسی محصولات</span></div><div><strong>۰۳</strong><span>راهنمایی انتخاب</span></div><div><strong>۰۴</strong><span>ارتباط مستقیم</span></div></div>
+    <a class="text-link" href="<?= e(url('about')) ?>">بیشتر درباره ما <span aria-hidden="true">&gt;</span></a>
+  </div>
+</div></section>
