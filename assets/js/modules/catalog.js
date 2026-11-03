@@ -6,7 +6,10 @@ export function initCatalogFilters() {
   const sort = document.querySelector('[data-catalog-sort]');
   const count = document.querySelector('[data-catalog-count]');
   const grid = document.querySelector('[data-catalog-grid]');
-  let selected = filters.find(button => button.classList.contains('is-active'))?.dataset.filter || 'all';
+  const empty = document.querySelector('[data-catalog-empty]');
+  const noResults = document.querySelector('[data-catalog-no-results]');
+  let selected = new URLSearchParams(window.location.search).get('category') || 'all';
+  if (!filters.some(button => button.dataset.filter === selected)) selected = 'all';
 
   const render = () => {
     const term = (search?.value || '').trim().toLocaleLowerCase('fa');
@@ -18,20 +21,25 @@ export function initCatalogFilters() {
       if (!card.hidden) visible++;
     });
     if (count) count.textContent = String(visible);
+    if (empty) empty.hidden = cards.length !== 0;
+    if (noResults) noResults.hidden = visible !== 0 || cards.length === 0;
     if (grid && sort?.value === 'name') {
       [...cards].sort((a,b) => a.dataset.name.localeCompare(b.dataset.name,'fa')).forEach(card => grid.append(card));
     } else if (grid && sort?.value === 'default') {
       [...cards].sort((a,b) => Number(a.dataset.order) - Number(b.dataset.order)).forEach(card => grid.append(card));
     }
   };
+
   filters.forEach(button => {
-    button.setAttribute('aria-pressed', String(button.dataset.filter === selected));
+    const active = button.dataset.filter === selected;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
     button.addEventListener('click', () => {
       selected = button.dataset.filter;
       filters.forEach(filter => {
-        const active = filter === button;
-        filter.classList.toggle('is-active', active);
-        filter.setAttribute('aria-pressed', String(active));
+        const isActive = filter.dataset.filter === selected;
+        filter.classList.toggle('is-active', isActive);
+        filter.setAttribute('aria-pressed', String(isActive));
       });
       render();
     });
