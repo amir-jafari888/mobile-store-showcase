@@ -29,6 +29,7 @@ if ($slides === []) $slides = $fallbackSlides;
   <?php if (count($slides) > 1): ?>
     <div class="hero-controls" aria-label="کنترل اسلایدر">
       <button class="hero-arrow" type="button" data-hero-prev aria-label="بنر قبلی">‹</button>
+      <button class="hero-pause" type="button" data-hero-toggle aria-label="توقف پخش خودکار بنرها" aria-pressed="false">Ⅱ</button>
       <div class="hero-dots" role="group" aria-label="انتخاب بنر">
         <?php foreach ($slides as $index => $_slide): ?>
           <button class="hero-dot<?= $index === 0 ? ' is-active' : '' ?>" type="button" data-hero-dot="<?= $index ?>" aria-label="نمایش بنر <?= $index + 1 ?>" aria-pressed="<?= $index === 0 ? 'true' : 'false' ?>"></button>
