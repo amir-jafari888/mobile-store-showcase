@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/app/Config/bootstrap.php';
 use App\Core\Router;
 use App\Services\PublicStorefrontService;
+
+require_once __DIR__ . '/app/Config/bootstrap.php';
 
 $storefront = new PublicStorefrontService();
 
@@ -43,9 +44,6 @@ $router->get('/', static function () use (
     require_once BASE_PATH . '/partials/footer.php';
 });
 
-/**
- * Catalog page
- */
 $router->get('/catalog', static function () use (
     $storeSettings,
     $categories,
@@ -54,16 +52,10 @@ $router->get('/catalog', static function () use (
     require BASE_PATH . '/pages/catalog.php';
 });
 
-/**
- * About page
- */
 $router->get('/about', static function () use ($storeSettings): void {
     require BASE_PATH . '/pages/about.php';
 });
 
-/**
- * Contact page
- */
 $router->get('/contact', static function () use ($storeSettings): void {
     require BASE_PATH . '/pages/contact.php';
 });
