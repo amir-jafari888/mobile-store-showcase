@@ -155,3 +155,9 @@
 .admin-menu-toggle,.admin-menu-backdrop{display:none}
 :focus-visible{outline:3px solid rgba(118,81,166,.48);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+.admin-sidebar-note{margin:19px 0 13px;padding:13px 14px;border:1px solid #e4deea;border-radius:12px;background:#faf9fb}
+.admin-sidebar-note strong{display:block;color:#211b29;font-size:13px;font-weight:700}
+.admin-sidebar-note span{display:block;margin-top:4px;color:#51495b;font-size:11px;line-height:1.8}
+.admin-menu-toggle{min-height:44px;min-width:44px}
+.admin-nav a:focus-visible{outline:3px solid rgba(118,81,166,.45);outline-offset:2px}
