@@ -35,3 +35,11 @@
 
 .catalog-preview-note{margin:0 0 26px;padding:15px 18px;border-radius:14px;background:#E9E1F3;color:#51475E;font-size:13px;font-weight:700}
 .demo-note{display:inline-block;margin:-4px 0 12px;color:#8062B2;font-size:11px;font-weight:800}
+
+/* Detail pass: purposeful controls, stronger hierarchy, less template chrome */
+.eyebrow{display:none}
+.service-grid article>span,.benefit-list article>b,.about-facts strong{display:none}
+.benefit-list article{grid-template-columns:1fr}
+.about-facts span{display:block;font-size:14px;color:var(--ink);font-weight:700}
+.hero-pause{width:40px;height:40px;border:1px solid rgba(255,255,255,.52);border-radius:50%;background:rgba(25,22,31,.38);color:#fff;font-size:13px;backdrop-filter:blur(8px);transition:background var(--transition),transform var(--transition)}
+.hero-pause:hover{background:var(--accent);transform:scale(1.05)}
